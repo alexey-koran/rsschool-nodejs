@@ -23,7 +23,11 @@
     "streams:write": "node src/streams/write.js",
     "wt": "node src/wt/main.js",
     "zip:compress": "node src/zip/compress.js",
-    "zip:decompress": "node src/zip/decompress.js"
+    "zip:decompress": "node src/zip/decompress.js",
+    "lint": "eslint **/*.{js,cjs,mjs,ts,cts,mts}",
+    "lint:fix": "eslint **/*.{js,cjs,mjs,ts,cts,mts} --fix",
+    "prettier": "prettier --check \"**/*.{js,cjs,mjs,ts,cts,mts}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,cjs,mjs,ts,cts,mts}\""
   },
   "repository": {
     "type": "git",
@@ -39,5 +43,10 @@
   "bugs": {
     "url": "https://github.com/AlreadyBored/node-nodejs-basics/issues"
   },
-  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme"
+  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme",
+  "devDependencies": {
+    "@alexey-koran/eslint-config": "^0.2.0",
+    "@alexey-koran/prettier-config": "^0.1.1",
+    "prettier": "^3.3.3"
+  }
 }
