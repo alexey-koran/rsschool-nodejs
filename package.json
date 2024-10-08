@@ -43,13 +43,5 @@
   "bugs": {
     "url": "https://github.com/AlreadyBored/node-nodejs-basics/issues"
   },
-  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme",
-  "devDependencies": {
-    "@alexey-koran/eslint-config": "^0.2.2",
-    "@alexey-koran/prettier-config": "^0.1.1",
-    "@alexey-koran/tsconfig": "^0.1.0",
-    "@types/node": "^22.7.5",
-    "cross-env": "^7.0.3",
-    "prettier": "^3.3.3"
-  }
+  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme"
 }
