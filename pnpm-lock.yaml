@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@alexey-koran/eslint-config':
-        specifier: ^0.2.1
-        version: 0.2.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0)(typescript@5.6.2))(prettier@3.3.3)(typescript@5.6.2)
+        specifier: ^0.2.2
+        version: 0.2.2(@typescript-eslint/parser@8.8.1(eslint@9.12.0)(typescript@5.6.2))(prettier@3.3.3)(typescript@5.6.2)
       '@alexey-koran/prettier-config':
         specifier: ^0.1.1
         version: 0.1.1
@@ -29,8 +29,8 @@ importers:
 
 packages:
 
-  '@alexey-koran/eslint-config@0.2.1':
-    resolution: {integrity: sha512-8tTkD2nGx2OUkKMV8S0nrF20u0+tPg4zoFRmtnTMpOnE68IXnWqVxfozOr+V1/B8HbaMT4XRGqxNZXw8z1Vmcw==}
+  '@alexey-koran/eslint-config@0.2.2':
+    resolution: {integrity: sha512-Ns0LsHUQAayR7QL8x1sQLl96LWEcVDZPhualrQ35zVKWMU4sVZRDkoRDuBiwRff8XgfglcAUsvqLW5pl44mlJg==}
 
   '@alexey-koran/prettier-config@0.1.1':
     resolution: {integrity: sha512-glzqP90tgQyMyJZjO+j8al1Y9rNyWGydt+mUgLd/srGRBpnqI53TVZHnNSo/LoNXxy/11ELc6lwkdZFWmaMIAg==}
@@ -1163,7 +1163,7 @@ packages:
 
 snapshots:
 
-  '@alexey-koran/eslint-config@0.2.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0)(typescript@5.6.2))(prettier@3.3.3)(typescript@5.6.2)':
+  '@alexey-koran/eslint-config@0.2.2(@typescript-eslint/parser@8.8.1(eslint@9.12.0)(typescript@5.6.2))(prettier@3.3.3)(typescript@5.6.2)':
     dependencies:
       '@eslint/js': 9.12.0
       '@stylistic/eslint-plugin-js': 2.9.0(eslint@9.12.0)
