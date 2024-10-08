@@ -9,9 +9,7 @@ const read = async () => {
 
   const input = createReadStream(`${currentFolderPath}/files/fileToRead.txt`);
 
-  input.on('data', (data) => {
-    stdout.write(data.toString());
-  });
+  input.pipe(stdout);
 };
 
 await read();
