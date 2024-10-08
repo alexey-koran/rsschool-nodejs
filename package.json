@@ -47,6 +47,8 @@
   "devDependencies": {
     "@alexey-koran/eslint-config": "^0.2.0",
     "@alexey-koran/prettier-config": "^0.1.1",
+    "@alexey-koran/tsconfig": "^0.1.0",
+    "@types/node": "^22.7.5",
     "prettier": "^3.3.3"
   }
 }
