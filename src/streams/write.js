@@ -9,13 +9,7 @@ const currentFolderPath = dirname(filePath);
 const write = async () => {
   const writeableStream = createWriteStream(`${currentFolderPath}/files/fileToWrite.txt`);
 
-  stdin.on('data', (data) => {
-    writeableStream.write(data);
-  });
-
-  stdin.on('end', () => {
-    writeableStream.end();
-  });
+  stdin.pipe(writeableStream);
 };
 
 await write();
