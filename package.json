@@ -23,11 +23,7 @@
     "streams:write": "node src/streams/write.js",
     "wt": "node src/wt/main.js",
     "zip:compress": "node src/zip/compress.js",
-    "zip:decompress": "node src/zip/decompress.js",
-    "lint": "eslint **/*.{js,cjs,mjs,ts,cts,mts}",
-    "lint:fix": "eslint **/*.{js,cjs,mjs,ts,cts,mts} --fix",
-    "prettier": "prettier --check \"**/*.{js,cjs,mjs,ts,cts,mts}\"",
-    "prettier:fix": "prettier --write \"**/*.{js,cjs,mjs,ts,cts,mts}\""
+    "zip:decompress": "node src/zip/decompress.js"
   },
   "repository": {
     "type": "git",
