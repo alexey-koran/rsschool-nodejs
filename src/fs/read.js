@@ -7,8 +7,11 @@ const currentFolderPath = dirname(filePath);
 
 const read = async () => {
   try {
-    const fileContent = await readFile(`${currentFolderPath}/files/fileToRead.txt`);
-    console.debug(fileContent.toString());
+    const fileContent = await readFile(`${currentFolderPath}/files/fileToRead.txt`, {
+      encoding: 'utf8',
+    });
+
+    console.debug(fileContent);
   } catch (error) {
     if (error?.code === 'ENOENT') {
       throw new Error('FS operation failed');
