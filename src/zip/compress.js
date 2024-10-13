@@ -1,5 +1,18 @@
+import { createReadStream, createWriteStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+import { createGzip } from 'node:zlib';
+
 const compress = async () => {
-    // Write your code here 
+  try {
+    const gzip = createGzip();
+
+    const source = createReadStream(`${import.meta.dirname}/files/fileToCompress.txt`);
+    const destination = createWriteStream(`${import.meta.dirname}/files/archive.gz`);
+
+    await pipeline(source, gzip, destination);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 await compress();
