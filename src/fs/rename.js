@@ -1,14 +1,9 @@
 import { rename as fsRename, access, constants } from 'node:fs/promises';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
 
 const rename = async () => {
   try {
     const properFileExists = await access(
-      `${currentFolderPath}/files/properFilename.md`,
+      `${import.meta.dirname}/files/properFilename.md`,
       constants.R_OK | constants.W_OK,
     );
 
@@ -23,8 +18,8 @@ const rename = async () => {
 
   try {
     await fsRename(
-      `${currentFolderPath}/files/wrongFilename.txt`,
-      `${currentFolderPath}/files/properFilename.md`,
+      `${import.meta.dirname}/files/wrongFilename.txt`,
+      `${import.meta.dirname}/files/properFilename.md`,
     );
   } catch (error) {
     if (error?.code === 'ENOENT') {

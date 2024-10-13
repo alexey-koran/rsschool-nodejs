@@ -1,13 +1,8 @@
 import { cp } from 'node:fs/promises';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
 
 const copy = async () => {
   try {
-    await cp(`${currentFolderPath}/files`, `${currentFolderPath}/files_copy`, {
+    await cp(`${import.meta.dirname}/files`, `${import.meta.dirname}/files_copy`, {
       errorOnExist: true,
       force: false,
       recursive: true,

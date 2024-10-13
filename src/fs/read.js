@@ -1,13 +1,8 @@
 import { readFile } from 'node:fs/promises';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
 
 const read = async () => {
   try {
-    const fileContent = await readFile(`${currentFolderPath}/files/fileToRead.txt`, {
+    const fileContent = await readFile(`${import.meta.dirname}/files/fileToRead.txt`, {
       encoding: 'utf8',
     });
 

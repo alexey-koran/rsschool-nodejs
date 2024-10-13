@@ -1,7 +1,6 @@
 import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
-import { dirname, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { sep } from 'node:path';
 
 await import('./files/c.js');
 
@@ -19,11 +18,8 @@ console.debug(`Release ${release()}`);
 console.debug(`Version ${version()}`);
 console.debug(`Path segment separator is "${sep}"`);
 
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
-
-console.debug(`Path to current file is ${filePath}`);
-console.debug(`Path to current directory is ${currentFolderPath}`);
+console.debug(`Path to current file is ${import.meta.filename}`);
+console.debug(`Path to current directory is ${import.meta.dirname}`);
 
 const myServer = createServerHttp((_, res) => {
   res.end('Request accepted');

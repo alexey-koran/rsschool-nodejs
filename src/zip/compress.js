@@ -1,18 +1,13 @@
 import { createReadStream, createWriteStream } from 'node:fs';
-import { dirname } from 'node:path';
 import { pipeline } from 'node:stream/promises';
-import { fileURLToPath } from 'node:url';
 import { createGzip } from 'node:zlib';
-
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
 
 const compress = async () => {
   try {
     const gzip = createGzip();
 
-    const source = createReadStream(`${currentFolderPath}/files/fileToCompress.txt`);
-    const destination = createWriteStream(`${currentFolderPath}/files/archive.gz`);
+    const source = createReadStream(`${import.meta.dirname}/files/fileToCompress.txt`);
+    const destination = createWriteStream(`${import.meta.dirname}/files/archive.gz`);
 
     await pipeline(source, gzip, destination);
   } catch (error) {

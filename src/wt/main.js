@@ -1,10 +1,5 @@
 import { availableParallelism } from 'node:os';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { Worker } from 'node:worker_threads';
-
-const filePath = fileURLToPath(import.meta.url);
-const currentFolderPath = dirname(filePath);
 
 let startNCount = 10;
 
@@ -14,7 +9,7 @@ const performCalculations = async () => {
 
   for (let i = 0; i < cpuCoresCount; i += 1) {
     const workerPromise = new Promise((resolve, reject) => {
-      const newWorker = new Worker(`${currentFolderPath}/worker.js`, {
+      const newWorker = new Worker(`${import.meta.dirname}/worker.js`, {
         workerData: { n: startNCount + i },
       });
 
