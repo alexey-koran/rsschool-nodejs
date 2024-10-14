@@ -1,12 +1,26 @@
 {
   "name": "node-file-manager",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexey-koran/node-file-manager.git"
+  },
+  "keywords": [
+    "nodejs",
+    "assignments"
+  ],
   "author": "Alexey-Koran <alexey.koran@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexey-koran/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/alexey-koran/node-file-manager#readme"
 }
