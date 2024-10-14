@@ -6,8 +6,9 @@
     "node": ">=22.0.0"
   },
   "type": "module",
+  "main": "src/file-manager.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/file-manager.mjs"
   },
   "repository": {
     "type": "git",
