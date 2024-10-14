@@ -1,9 +1,14 @@
 export const commandsHelp = {
-  up: {
-    command: 'up',
+  add: {
+    command: 'add new_file_name',
     description: {
-      text: 'Go upper from current directory',
-      hint: "(when you are in the root folder this operation shouldn't change working directory)",
+      text: 'Create empty file in current working directory',
+    },
+  },
+  cat: {
+    command: 'cat path_to_file',
+    description: {
+      text: "Read file and print it's content in console",
     },
   },
   cd: {
@@ -13,29 +18,10 @@ export const commandsHelp = {
       hint: '(path_to_directory can be relative or absolute)',
     },
   },
-  ls: {
-    command: 'ls',
+  compress: {
+    command: 'compress path_to_file path_to_destination',
     description: {
-      text: 'Print in console list of all files and folders in current directory',
-    },
-  },
-  cat: {
-    command: 'cat path_to_file',
-    description: {
-      text: "Read file and print it's content in console",
-    },
-  },
-  add: {
-    command: 'add new_file_name',
-    description: {
-      text: 'Create empty file in current working directory',
-    },
-  },
-  rn: {
-    command: 'rn path_to_file new_filename',
-    description: {
-      text: 'Rename file',
-      hint: '(content will remain unchanged)',
+      text: 'Compress file',
     },
   },
   cp: {
@@ -44,16 +30,48 @@ export const commandsHelp = {
       text: 'Copy file',
     },
   },
+  decompress: {
+    command: 'decompress path_to_file path_to_destination',
+    description: {
+      text: 'Decompress file',
+    },
+  },
+  exit: {
+    command: '.exit',
+    description: {
+      text: 'Exit program',
+    },
+  },
+  hash: {
+    command: 'hash path_to_file',
+    description: {
+      text: 'Calculate hash for file and print it into console',
+    },
+  },
+  help: {
+    command: 'help',
+    options: {
+      commandName: {
+        command: 'help command_name',
+        description: {
+          text: 'Display command description',
+        },
+      },
+    },
+    description: {
+      text: 'Display program commands, their options and descriptions',
+    },
+  },
+  ls: {
+    command: 'ls',
+    description: {
+      text: 'Print in console list of all files and folders in current directory',
+    },
+  },
   mv: {
     command: 'mv path_to_file path_to_new_directory',
     description: {
       text: 'Move file',
-    },
-  },
-  rm: {
-    command: 'rm path_to_file',
-    description: {
-      text: 'Delete file',
     },
   },
   os: {
@@ -97,22 +115,24 @@ export const commandsHelp = {
       text: 'Operating system info',
     },
   },
-  hash: {
-    command: 'hash path_to_file',
+  rm: {
+    command: 'rm path_to_file',
     description: {
-      text: 'Calculate hash for file and print it into console',
+      text: 'Delete file',
     },
   },
-  compress: {
-    command: 'compress path_to_file path_to_destination',
+  rn: {
+    command: 'rn path_to_file new_filename',
     description: {
-      text: 'Compress file',
+      text: 'Rename file',
+      hint: '(content will remain unchanged)',
     },
   },
-  decompress: {
-    command: 'decompress path_to_file path_to_destination',
+  up: {
+    command: 'up',
     description: {
-      text: 'Decompress file',
+      text: 'Go upper from current directory',
+      hint: "(when you are in the root folder this operation shouldn't change working directory)",
     },
   },
 };
