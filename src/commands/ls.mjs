@@ -4,9 +4,12 @@ export const ls = async ({ currentWorkingDirectory }) => {
   const dirList = await readdir(currentWorkingDirectory, { withFileTypes: true });
 
   const tableList = dirList.map((element) => {
+    const elementType =
+      (element.isDirectory() && 'directory') || (element.isFile() && 'file') || 'unknown';
+
     return {
       name: element.name,
-      type: element.isDirectory() ? 'directory' : 'file',
+      type: elementType,
     };
   });
 
