@@ -34,8 +34,10 @@ const handleCommand = async ({
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
+  let newWorkingDirectory;
+
   try {
-    await commandsMap[command]({
+    newWorkingDirectory = await commandsMap[command]({
       properties,
       flags,
       programMessages,
@@ -48,7 +50,7 @@ const handleCommand = async ({
     console.error(error?.message);
   }
 
-  printWorkingDirectory(currentWorkingDirectory);
+  printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
 };
 
 const startFileManager = async () => {

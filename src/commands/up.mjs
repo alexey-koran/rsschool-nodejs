@@ -12,4 +12,6 @@ export const up = ({ currentWorkingDirectory, changeCurrentWorkingDirectory }) =
   }
 
   changeCurrentWorkingDirectory(newPath);
+
+  return newPath;
 };

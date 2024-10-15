@@ -16,4 +16,6 @@ export const cd = ({
   }
 
   changeCurrentWorkingDirectory(newPath);
+
+  return newPath;
 };
