@@ -1,17 +1,13 @@
 import { createReadStream } from 'node:fs';
-import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 
-import { programErrors } from '../messages.mjs';
+import { validatePath } from '../utils.mjs';
 
 export const hash = async ({ passedProps: pathToFile, currentWorkingDirectory }) => {
   const newPath = join(currentWorkingDirectory, pathToFile);
-  const homeDir = homedir();
 
-  if (!newPath.startsWith(homeDir)) {
-    throw new Error(programErrors.outOfRootDirectory);
-  }
+  await validatePath(newPath);
 
   const { createHash } = await import('node:crypto');
 
