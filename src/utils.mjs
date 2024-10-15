@@ -65,7 +65,7 @@ export const validateFuncProps = async ({
   passedProps,
   propertiesNames,
 }) => {
-  if (!flags.supported && passedFlags && passedFlags?.length > 0) {
+  if (!flags.support && passedFlags && passedFlags?.length > 0) {
     throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
   }
 
