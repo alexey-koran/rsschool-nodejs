@@ -61,7 +61,7 @@ const startFileManager = async () => {
 
     if (commandsMap[command]) {
       try {
-        const { flags, mandatoryProperties } = commandsMap[command];
+        const { flags, mandatoryProperties, optionalProperties } = commandsMap[command];
 
         await validateFuncProps({
           flags,
@@ -69,6 +69,7 @@ const startFileManager = async () => {
           passedProps,
           passedFlags,
           mandatoryProperties,
+          optionalProperties,
         });
 
         try {

@@ -77,37 +77,35 @@ export const commandsHelp = {
   os: {
     command: 'os',
     options: {
-      flag: {
-        eol: {
-          command: 'os --EOL',
-          description: {
-            text: 'Get EOL (default system End-Of-Line) and print it to console',
-          },
+      eol: {
+        command: 'os --EOL',
+        description: {
+          text: 'Get EOL (default system End-Of-Line) and print it to console',
         },
-        cpus: {
-          command: 'os --cpus',
-          description: {
-            text: 'Get host machine CPUs info and print it to console',
-            hint: '(overall amount of CPUS plus model and clock rate (in GHz) for each of them)',
-          },
+      },
+      cpus: {
+        command: 'os --cpus',
+        description: {
+          text: 'Get host machine CPUs info and print it to console',
+          hint: '(overall amount of CPUS plus model and clock rate (in GHz) for each of them)',
         },
-        homedir: {
-          command: 'os --homedir',
-          description: {
-            text: 'Get home directory and print it to console',
-          },
+      },
+      homedir: {
+        command: 'os --homedir',
+        description: {
+          text: 'Get home directory and print it to console',
         },
-        username: {
-          command: 'os --username',
-          description: {
-            text: 'Get current system user name and print it to console',
-          },
+      },
+      username: {
+        command: 'os --username',
+        description: {
+          text: 'Get current system user name and print it to console',
         },
-        architecture: {
-          command: 'os --architecture',
-          description: {
-            text: 'Get CPU architecture for which Node.js binary has compiled and print it to console',
-          },
+      },
+      architecture: {
+        command: 'os --architecture',
+        description: {
+          text: 'Get CPU architecture for which Node.js binary has compiled and print it to console',
         },
       },
     },

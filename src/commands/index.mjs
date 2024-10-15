@@ -76,7 +76,8 @@ export const commandsMap = {
     flags: {
       support: false,
     },
-    mandatoryProperties: ['Command name'],
+    mandatoryProperties: [],
+    optionalProperties: ['Command name'],
   },
   ls: {
     func: ls,

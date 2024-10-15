@@ -73,10 +73,15 @@ export const validateFuncProps = async ({
   passedFlags,
   passedProps,
   mandatoryProperties,
+  optionalProperties,
 }) => {
   const passedFlagsCount = passedFlags?.length;
   const passedPropsCount = passedProps?.length;
+
   const mandatoryPropertiesCount = mandatoryProperties?.length;
+  const optionalPropertiesCount = optionalProperties?.length;
+
+  const totalPropertiesCount = mandatoryPropertiesCount + optionalPropertiesCount;
 
   const isSupportFlags = flags.support;
 
@@ -84,7 +89,7 @@ export const validateFuncProps = async ({
     throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
   }
 
-  if (passedPropsCount > mandatoryPropertiesCount) {
+  if (passedPropsCount > totalPropertiesCount) {
     throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
   }
 
@@ -119,4 +124,30 @@ export const validatePath = async (path, options = { pingPath: false }) => {
   if (options.pingPath) {
     await pingPath(path);
   }
+};
+
+export const prepareHelpArr = (helpObj) => {
+  const helpKeys = Object.keys(helpObj);
+
+  const helpArr = helpKeys.map((key) => {
+    const property = helpObj[key];
+
+    const {
+      command,
+      description: { text, hint },
+      options,
+    } = property;
+
+    const isOptionsExists = options && Object.keys(options)?.length;
+
+    return {
+      key,
+      command,
+      description: text,
+      ...(hint && { hint }),
+      ...(isOptionsExists && { options }),
+    };
+  });
+
+  return helpArr;
 };
