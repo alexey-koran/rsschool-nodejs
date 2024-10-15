@@ -31,7 +31,7 @@ const handleCommand = async (command, properties, flags, programMessages) => {
 
     console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
   } catch (error) {
-    throw new Error(error);
+    console.error(error?.message);
   }
 
   printWorkingDirectory();
@@ -46,11 +46,7 @@ const startFileManager = async () => {
     const { command, properties, flags } = parseLine(line);
 
     if (commandsMap[command]) {
-      try {
-        await handleCommand(command, properties, flags, programMessages);
-      } catch (error) {
-        console.error(error);
-      }
+      await handleCommand(command, properties, flags, programMessages);
     } else {
       console.error(programErrors.invalidInput);
     }
