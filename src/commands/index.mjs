@@ -21,7 +21,7 @@ export const commandsMap = {
   compress,
   cp,
   decompress,
-  exit,
+  '.exit': exit,
   hash,
   help,
   ls,
