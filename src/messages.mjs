@@ -5,6 +5,7 @@ export const programErrors = {
   outOfRootDirectory: "You can't go upper than root directory",
   notSupportFlags: 'command does not support flags',
   notSpecified: 'not specified',
+  tooMuchArguments: 'Too much arguments',
 };
 
 const defaultMessages = {
