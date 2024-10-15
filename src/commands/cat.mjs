@@ -1,9 +1,9 @@
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { join } from 'node:path';
 
 import { programErrors } from '../messages.mjs';
 
-export const cat = async ({ properties: pathToFile, flags }) => {
+export const cat = async ({ properties: pathToFile, flags, currentWorkingDirectory }) => {
   if (flags && flags.length > 0) {
     throw new Error(`${programErrors.invalidInput}. \nCat command does not support flags.`);
   }
@@ -13,7 +13,7 @@ export const cat = async ({ properties: pathToFile, flags }) => {
   }
 
   try {
-    const fileContent = await readFile(resolve(pathToFile), {
+    const fileContent = await readFile(join(currentWorkingDirectory, pathToFile), {
       encoding: 'utf8',
     });
 

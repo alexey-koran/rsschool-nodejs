@@ -1,3 +1,4 @@
+import { homedir } from 'node:os';
 import { argv, stdin, stdout, exit } from 'node:process';
 import { createInterface } from 'node:readline/promises';
 
@@ -10,14 +11,14 @@ import {
 } from './messages.mjs';
 import { getUsername, parseLine } from './utils.mjs';
 
-const initFileManager = () => {
+const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsername(argv);
 
   const programMessages = getProgramMessages(currentUsername);
 
   printWelcomeUser(programMessages);
 
-  printWorkingDirectory();
+  printWorkingDirectory(currentWorkingDirectory);
 
   return {
     programMessages,
@@ -25,20 +26,39 @@ const initFileManager = () => {
   };
 };
 
-const handleCommand = async (command, properties, flags, programMessages) => {
+const handleCommand = async ({
+  command,
+  properties,
+  flags,
+  programMessages,
+  currentWorkingDirectory,
+  changeCurrentWorkingDirectory,
+}) => {
   try {
-    await commandsMap[command]({ properties, flags, programMessages });
+    await commandsMap[command]({
+      properties,
+      flags,
+      programMessages,
+      currentWorkingDirectory,
+      changeCurrentWorkingDirectory,
+    });
 
     console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
   } catch (error) {
     console.error(error?.message);
   }
 
-  printWorkingDirectory();
+  printWorkingDirectory(currentWorkingDirectory);
 };
 
 const startFileManager = async () => {
-  const { programMessages } = initFileManager();
+  let currentWorkingDirectory = homedir();
+
+  const changeCurrentWorkingDirectory = (newWorkingDirectory) => {
+    currentWorkingDirectory = newWorkingDirectory;
+  };
+
+  const { programMessages } = initFileManager(currentWorkingDirectory);
 
   const rl = createInterface({ input: stdin, output: stdout, prompt: '' });
 
@@ -46,7 +66,14 @@ const startFileManager = async () => {
     const { command, properties, flags } = parseLine(line);
 
     if (commandsMap[command]) {
-      await handleCommand(command, properties, flags, programMessages);
+      await handleCommand({
+        command,
+        properties,
+        flags,
+        programMessages,
+        currentWorkingDirectory,
+        changeCurrentWorkingDirectory,
+      });
     } else {
       console.error(programErrors.invalidInput);
     }

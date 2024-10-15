@@ -23,6 +23,6 @@ export const printWelcomeUser = (programMessages) => {
   console.debug(programMessages.welcome);
 };
 
-export const printWorkingDirectory = () => {
-  console.debug(`You are currently in ${import.meta.dirname}\n`);
+export const printWorkingDirectory = (workingDirectory) => {
+  console.debug(`You are currently in ${workingDirectory}\n`);
 };

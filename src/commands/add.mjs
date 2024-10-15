@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 
 import { programErrors } from '../messages.mjs';
 
-export const add = async ({ properties: newFileName, flags }) => {
+export const add = async ({ properties: newFileName, flags, currentWorkingDirectory }) => {
   if (flags && flags.length > 0) {
     throw new Error(`${programErrors.invalidInput}. \nAdd command does not support flags.`);
   }
@@ -12,7 +12,7 @@ export const add = async ({ properties: newFileName, flags }) => {
   }
 
   try {
-    await writeFile(`${import.meta.dirname}/${newFileName}`, '', { flag: 'wx' });
+    await writeFile(`${currentWorkingDirectory}/${newFileName}`, '', { flag: 'wx' });
   } catch (error) {
     throw new Error(`${programErrors.operationFailed}. \n${error}`);
   }
