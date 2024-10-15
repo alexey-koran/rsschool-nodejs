@@ -3,10 +3,12 @@ import { join } from 'node:path';
 import { validatePath } from '../utils.mjs';
 
 export const cd = async ({
-  passedProps: pathToDirectory,
+  passedProps,
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
+  const pathToDirectory = passedProps[0];
+
   const newPath = join(currentWorkingDirectory, pathToDirectory);
 
   await validatePath(newPath, { pingPath: true });

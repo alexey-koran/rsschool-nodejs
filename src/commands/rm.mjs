@@ -3,7 +3,9 @@ import { join } from 'node:path';
 
 import { validatePath } from '../utils.mjs';
 
-export const rm = async ({ passedProps: pathToFile, currentWorkingDirectory }) => {
+export const rm = async ({ passedProps, currentWorkingDirectory }) => {
+  const pathToFile = passedProps[0];
+
   const newPath = join(currentWorkingDirectory, pathToFile);
 
   await validatePath(newPath);

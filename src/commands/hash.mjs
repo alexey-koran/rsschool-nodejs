@@ -4,7 +4,9 @@ import { pipeline } from 'node:stream/promises';
 
 import { validatePath } from '../utils.mjs';
 
-export const hash = async ({ passedProps: pathToFile, currentWorkingDirectory }) => {
+export const hash = async ({ passedProps, currentWorkingDirectory }) => {
+  const pathToFile = passedProps[0];
+
   const newPath = join(currentWorkingDirectory, pathToFile);
 
   await validatePath(newPath);
