@@ -11,7 +11,7 @@ export const getUsername = (argv) => {
   if (usernameArgument) {
     const username = usernameArgument.slice(usernameArgument.indexOf('=') + 1);
 
-    if (username.length > 0) {
+    if (username?.length > 0) {
       return username;
     }
   }
