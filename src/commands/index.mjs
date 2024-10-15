@@ -20,77 +20,77 @@ export const commandsMap = {
     flags: {
       support: false,
     },
-    propertiesNames: ['New file name'],
+    mandatoryProperties: ['New file name'],
   },
   cat: {
     func: cat,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file'],
+    mandatoryProperties: ['Path to file'],
   },
   cd: {
     func: cd,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to directory'],
+    mandatoryProperties: ['Path to directory'],
   },
   compress: {
     func: compress,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file', 'Path to destination'],
+    mandatoryProperties: ['Path to file', 'Path to destination'],
   },
   cp: {
     func: cp,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file', 'Path to new directory'],
+    mandatoryProperties: ['Path to file', 'Path to new directory'],
   },
   decompress: {
     func: decompress,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file', 'Path to destination'],
+    mandatoryProperties: ['Path to file', 'Path to destination'],
   },
   '.exit': {
     func: exit,
     flags: {
       support: false,
     },
-    propertiesNames: [],
+    mandatoryProperties: [],
   },
   hash: {
     func: hash,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file'],
+    mandatoryProperties: ['Path to file'],
   },
   help: {
     func: help,
     flags: {
       support: false,
     },
-    propertiesNames: ['Command name'],
+    mandatoryProperties: ['Command name'],
   },
   ls: {
     func: ls,
     flags: {
       support: false,
     },
-    propertiesNames: [],
+    mandatoryProperties: [],
   },
   mv: {
     func: mv,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file', 'Path to new directory'],
+    mandatoryProperties: ['Path to file', 'Path to new directory'],
   },
   os: {
     func: os,
@@ -98,27 +98,27 @@ export const commandsMap = {
       support: true,
       list: ['--EOL', '--cpus', '--homedir', '--username', '--architecture'],
     },
-    propertiesNames: [],
+    mandatoryProperties: [],
   },
   rm: {
     func: rm,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file'],
+    mandatoryProperties: ['Path to file'],
   },
   rn: {
     func: rn,
     flags: {
       support: false,
     },
-    propertiesNames: ['Path to file', 'New filename'],
+    mandatoryProperties: ['Path to file', 'New filename'],
   },
   up: {
     func: up,
     flags: {
       support: false,
     },
-    propertiesNames: [],
+    mandatoryProperties: [],
   },
 };

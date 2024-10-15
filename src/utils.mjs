@@ -72,20 +72,32 @@ export const validateFuncProps = async ({
   command,
   passedFlags,
   passedProps,
-  propertiesNames,
+  mandatoryProperties,
 }) => {
-  if (!flags.support && passedFlags?.length > 0) {
+  const passedFlagsCount = passedFlags?.length;
+  const passedPropsCount = passedProps?.length;
+  const mandatoryPropertiesCount = mandatoryProperties?.length;
+
+  const isSupportFlags = flags.support;
+
+  if (!isSupportFlags && passedFlagsCount) {
     throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
   }
 
-  if (propertiesNames?.length > 0 && (!passedProps || passedProps?.length === 0)) {
-    throw new Error(
-      `${programErrors.invalidInput}\n${propertiesNames.join(', ').trim()} ${programErrors.notSpecified}`,
-    );
+  if (passedPropsCount > mandatoryPropertiesCount) {
+    throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
   }
 
-  if (passedProps?.length > propertiesNames?.length) {
-    throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
+  if (mandatoryPropertiesCount && !passedPropsCount) {
+    throw new Error(
+      `${programErrors.invalidInput}\n${mandatoryProperties.join(', ').trim()} ${programErrors.notSpecified}`,
+    );
+  } else if (mandatoryPropertiesCount && passedPropsCount < mandatoryPropertiesCount) {
+    const notSpecifiedMandatoryFields = mandatoryProperties.slice(passedPropsCount);
+
+    throw new Error(
+      `${programErrors.invalidInput}\n${notSpecifiedMandatoryFields.join(', ').trim()} ${programErrors.notSpecified}`,
+    );
   }
 };
 
