@@ -1,3 +1,4 @@
+import { access, constants } from 'node:fs/promises';
 import { exit } from 'node:process';
 
 import { programErrors } from './messages.mjs';
@@ -28,31 +29,57 @@ export const parseLine = (line) => {
   if (hasParams) {
     const command = trimmedLine.slice(0, trimmedLine.indexOf(' '));
 
-    const flags = trimmedLine.match(/--\w*\s?/g);
+    const passedFlags = trimmedLine.match(/--\w*\s?/g);
 
-    if (flags && flags.length > 0) {
-      const properties = flags?.reduce(
+    if (passedFlags && passedFlags.length > 0) {
+      const passedProps = passedFlags?.reduce(
         (acc, curr) => acc.replace(curr, ''),
         trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
       );
 
       return {
         command,
-        properties,
-        flags,
+        passedProps,
+        passedFlags,
       };
     }
 
     return {
       command,
-      flags,
-      properties: trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
+      passedFlags,
+      passedProps: trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
     };
   }
 
   return {
     command: trimmedLine,
-    properties: null,
-    flags: null,
+    passedProps: null,
+    passedFlags: null,
   };
+};
+
+export const validateFuncProps = async ({
+  flags,
+  command,
+  passedFlags,
+  passedProps,
+  propertiesNames,
+}) => {
+  if (!flags.supported && passedFlags && passedFlags?.length > 0) {
+    throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
+  }
+
+  if (propertiesNames?.length > 0 && (!passedProps || passedProps?.length === 0)) {
+    throw new Error(
+      `${programErrors.invalidInput}\n${propertiesNames.join(', ').trim()} ${programErrors.notSpecified}`,
+    );
+  }
+};
+
+export const validatePath = async (path) => {
+  try {
+    await access(path, constants.F_OK);
+  } catch (error) {
+    throw new Error(`${programErrors.invalidInput} ${error?.message}`);
+  }
 };
