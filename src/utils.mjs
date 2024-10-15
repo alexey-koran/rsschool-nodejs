@@ -19,3 +19,40 @@ export const getUsername = (argv) => {
 
   exit(0);
 };
+
+export const parseLine = (line) => {
+  const trimmedLine = line.trim();
+
+  const hasParams = trimmedLine.includes(' ');
+
+  if (hasParams) {
+    const command = trimmedLine.slice(0, trimmedLine.indexOf(' '));
+
+    const flags = trimmedLine.match(/--\w*\s?/g);
+
+    if (flags && flags.length > 0) {
+      const properties = flags?.reduce(
+        (acc, curr) => acc.replace(curr, ''),
+        trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
+      );
+
+      return {
+        command,
+        properties,
+        flags,
+      };
+    }
+
+    return {
+      command,
+      flags,
+      properties: trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
+    };
+  }
+
+  return {
+    command: trimmedLine,
+    properties: null,
+    flags: null,
+  };
+};
