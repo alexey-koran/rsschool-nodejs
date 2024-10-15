@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import { programErrors } from '../messages.mjs';
 
-export const cat = async (pathToFile, flags) => {
+export const cat = async ({ properties: pathToFile, flags }) => {
   if (flags && flags.length > 0) {
     throw new Error(`${programErrors.invalidInput}. \nCat command does not support flags.`);
   }

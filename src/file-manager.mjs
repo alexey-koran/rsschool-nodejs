@@ -27,7 +27,7 @@ const initFileManager = () => {
 
 const handleCommand = async (command, properties, flags, programMessages) => {
   try {
-    await commandsMap[command](properties, flags);
+    await commandsMap[command]({ properties, flags, programMessages });
 
     console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
   } catch (error) {

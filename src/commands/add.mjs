@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 
 import { programErrors } from '../messages.mjs';
 
-export const add = async (newFileName, flags) => {
+export const add = async ({ properties: newFileName, flags }) => {
   if (flags && flags.length > 0) {
     throw new Error(`${programErrors.invalidInput}. \nAdd command does not support flags.`);
   }
