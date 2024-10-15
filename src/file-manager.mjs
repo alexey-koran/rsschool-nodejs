@@ -8,7 +8,7 @@ import {
   printWelcomeUser,
   programErrors,
 } from './messages.mjs';
-import { getUsername } from './utils.mjs';
+import { getUsername, parseLine } from './utils.mjs';
 
 const initFileManager = () => {
   const currentUsername = getUsername(argv);
@@ -25,17 +25,13 @@ const initFileManager = () => {
   };
 };
 
-const handleCommand = async (command, programMessages) => {
-  if (commandsMap[command]) {
-    try {
-      await commandsMap[command]();
+const handleCommand = async (command, properties, flags, programMessages) => {
+  try {
+    await commandsMap[command](properties, flags);
 
-      console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.error(programErrors.invalidInput);
+    console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
+  } catch (error) {
+    throw new Error(error);
   }
 
   printWorkingDirectory();
@@ -46,8 +42,18 @@ const startFileManager = async () => {
 
   const rl = createInterface({ input: stdin, output: stdout, prompt: '' });
 
-  rl.on('line', async (command) => {
-    await handleCommand(command, programMessages);
+  rl.on('line', async (line) => {
+    const { command, properties, flags } = parseLine(line);
+
+    if (commandsMap[command]) {
+      try {
+        await handleCommand(command, properties, flags, programMessages);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error(programErrors.invalidInput);
+    }
   });
 
   rl.on('SIGINT', () => {
