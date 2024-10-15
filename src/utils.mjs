@@ -1,4 +1,5 @@
 import { access, constants } from 'node:fs/promises';
+import { homedir } from 'node:os';
 import { exit } from 'node:process';
 
 import { programErrors } from './messages.mjs';
@@ -21,6 +22,8 @@ export const getUsername = (argv) => {
   exit(0);
 };
 
+const splitProps = (props) => props.split(' ');
+
 export const parseLine = (line) => {
   const trimmedLine = line.trim();
 
@@ -29,13 +32,17 @@ export const parseLine = (line) => {
   if (hasParams) {
     const command = trimmedLine.slice(0, trimmedLine.indexOf(' '));
 
-    const passedFlags = trimmedLine.match(/--\w*\s?/g);
+    const flagsAndProps = trimmedLine.slice(trimmedLine.indexOf(' ') + 1);
 
-    if (passedFlags && passedFlags.length > 0) {
-      const passedProps = passedFlags?.reduce(
+    const passedFlags = flagsAndProps.match(/--\w*\s?/g);
+
+    if (passedFlags?.length > 0) {
+      const propsWithoutFlags = passedFlags?.reduce(
         (acc, curr) => acc.replace(curr, ''),
-        trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
+        flagsAndProps,
       );
+
+      const passedProps = splitProps(propsWithoutFlags);
 
       return {
         command,
@@ -44,10 +51,12 @@ export const parseLine = (line) => {
       };
     }
 
+    const passedProps = splitProps(flagsAndProps);
+
     return {
       command,
       passedFlags,
-      passedProps: trimmedLine.slice(trimmedLine.indexOf(' ') + 1),
+      passedProps,
     };
   }
 
@@ -65,7 +74,7 @@ export const validateFuncProps = async ({
   passedProps,
   propertiesNames,
 }) => {
-  if (!flags.support && passedFlags && passedFlags?.length > 0) {
+  if (!flags.support && passedFlags?.length > 0) {
     throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
   }
 
@@ -74,12 +83,28 @@ export const validateFuncProps = async ({
       `${programErrors.invalidInput}\n${propertiesNames.join(', ').trim()} ${programErrors.notSpecified}`,
     );
   }
+
+  if (passedProps?.length > propertiesNames?.length) {
+    throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
+  }
 };
 
-export const validatePath = async (path) => {
+const pingPath = async (path) => {
   try {
     await access(path, constants.F_OK);
   } catch (error) {
     throw new Error(`${programErrors.invalidInput} ${error?.message}`);
+  }
+};
+
+export const validatePath = async (path, options = { pingPath: false }) => {
+  const homeDir = homedir();
+
+  if (!path.startsWith(homeDir)) {
+    throw new Error(programErrors.outOfRootDirectory);
+  }
+
+  if (options.pingPath) {
+    await pingPath(path);
   }
 };
