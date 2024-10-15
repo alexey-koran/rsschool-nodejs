@@ -2,6 +2,9 @@ export const programErrors = {
   usernameNotFound: "Username argument wasn't found! Please try again!",
   invalidInput: 'Invalid input',
   operationFailed: 'Operation failed',
+  outOfRootDirectory: "You can't go upper than root directory",
+  notSupportFlags: 'command does not support flags',
+  notSpecified: 'not specified',
 };
 
 const defaultMessages = {
