@@ -1,11 +1,11 @@
-import { access, constants } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
 import { programErrors } from '../messages.mjs';
+import { validatePath } from '../utils.mjs';
 
 export const cd = async ({
-  properties: pathToDirectory,
+  passedProps: pathToDirectory,
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
@@ -13,14 +13,10 @@ export const cd = async ({
   const homeDir = homedir();
 
   if (!newPath.startsWith(homeDir)) {
-    throw new Error(`${programErrors.invalidInput}. You can't go upper than root directory.`);
+    throw new Error(programErrors.outOfRootDirectory);
   }
 
-  try {
-    await access(newPath, constants.F_OK);
-  } catch (error) {
-    throw new Error(`${programErrors.invalidInput}. ${error?.message}`);
-  }
+  await validatePath(newPath);
 
   changeCurrentWorkingDirectory(newPath);
 

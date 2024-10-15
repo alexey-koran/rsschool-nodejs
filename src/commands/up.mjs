@@ -8,7 +8,7 @@ export const up = ({ currentWorkingDirectory, changeCurrentWorkingDirectory }) =
   const homeDir = homedir();
 
   if (!newPath.startsWith(homeDir)) {
-    throw new Error(`${programErrors.invalidInput}. You can't go upper than root directory.`);
+    throw new Error(programErrors.outOfRootDirectory);
   }
 
   changeCurrentWorkingDirectory(newPath);

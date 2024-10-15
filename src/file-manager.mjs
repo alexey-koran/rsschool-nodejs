@@ -9,7 +9,7 @@ import {
   printWelcomeUser,
   programErrors,
 } from './messages.mjs';
-import { getUsername, parseLine } from './utils.mjs';
+import { getUsername, parseLine, validateFuncProps } from './utils.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsername(argv);
@@ -28,27 +28,19 @@ const initFileManager = (currentWorkingDirectory) => {
 
 const handleCommand = async ({
   command,
-  properties,
-  flags,
+  passedProps,
+  passedFlags,
   programMessages,
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
-  let newWorkingDirectory;
-
-  try {
-    newWorkingDirectory = await commandsMap[command]({
-      properties,
-      flags,
-      programMessages,
-      currentWorkingDirectory,
-      changeCurrentWorkingDirectory,
-    });
-
-    console.debug(`\n${command} ${programMessages.operationSuccessful}\n`);
-  } catch (error) {
-    console.error(error?.message);
-  }
+  const newWorkingDirectory = await commandsMap[command].func({
+    passedProps,
+    passedFlags,
+    programMessages,
+    currentWorkingDirectory,
+    changeCurrentWorkingDirectory,
+  });
 
   printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
 };
@@ -65,17 +57,37 @@ const startFileManager = async () => {
   const rl = createInterface({ input: stdin, output: stdout, prompt: '' });
 
   rl.on('line', async (line) => {
-    const { command, properties, flags } = parseLine(line);
+    const { command, passedProps, passedFlags } = parseLine(line);
 
     if (commandsMap[command]) {
-      await handleCommand({
-        command,
-        properties,
-        flags,
-        programMessages,
-        currentWorkingDirectory,
-        changeCurrentWorkingDirectory,
-      });
+      try {
+        const { flags, propertiesNames } = commandsMap[command];
+
+        await validateFuncProps({
+          flags,
+          command,
+          passedProps,
+          passedFlags,
+          propertiesNames,
+        });
+
+        try {
+          await handleCommand({
+            command,
+            passedProps,
+            passedFlags,
+            programMessages,
+            currentWorkingDirectory,
+            changeCurrentWorkingDirectory,
+          });
+
+          console.debug(`${command} ${programMessages.operationSuccessful}\n`);
+        } catch (error) {
+          console.error(`${programErrors.operationFailed}. \n${error?.message}`);
+        }
+      } catch (error) {
+        console.error(error?.message);
+      }
     } else {
       console.error(programErrors.invalidInput);
     }
