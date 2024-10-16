@@ -1,9 +1,11 @@
 import { rename as fsRename, access, constants } from 'node:fs/promises';
 
 const rename = async () => {
+  const currentDirname = import.meta.dirname;
+
   try {
     const hasProperFile = await access(
-      `${import.meta.dirname}/files/properFilename.md`,
+      `${currentDirname}/files/properFilename.md`,
       constants.R_OK | constants.W_OK,
     );
 
@@ -18,8 +20,8 @@ const rename = async () => {
 
   try {
     await fsRename(
-      `${import.meta.dirname}/files/wrongFilename.txt`,
-      `${import.meta.dirname}/files/properFilename.md`,
+      `${currentDirname}/files/wrongFilename.txt`,
+      `${currentDirname}/files/properFilename.md`,
     );
   } catch (error) {
     if (error?.code === 'ENOENT') {
