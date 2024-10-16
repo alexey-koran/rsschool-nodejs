@@ -6,9 +6,9 @@
     "node": ">=22.0.0"
   },
   "type": "module",
-  "main": "src/file-manager.mjs",
+  "main": "src/fileManager.mjs",
   "scripts": {
-    "start": "node src/file-manager.mjs"
+    "start": "node src/fileManager.mjs"
   },
   "repository": {
     "type": "git",
