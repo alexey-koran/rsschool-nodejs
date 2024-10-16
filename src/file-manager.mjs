@@ -56,9 +56,9 @@ const startFileManager = async () => {
 
   const { programMessages } = initFileManager(currentWorkingDirectory);
 
-  const rl = createInterface({ input: stdin, output: stdout, prompt: '' });
+  const readLine = createInterface({ input: stdin, output: stdout, prompt: '' });
 
-  rl.on('line', async (line) => {
+  readLine.on('line', async (line) => {
     const { command, passedProps, passedFlags } = parseCommand(line);
 
     if (commandsMap[command]) {
@@ -98,7 +98,7 @@ const startFileManager = async () => {
     }
   });
 
-  rl.on('SIGINT', () => {
+  readLine.on('SIGINT', () => {
     console.debug(`${programMessages.goodbye}`);
 
     exit(0);
