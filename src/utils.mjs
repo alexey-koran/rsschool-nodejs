@@ -17,7 +17,7 @@ export const getUsername = (argv) => {
     }
   }
 
-  console.error(programErrors.usernameNotFound);
+  console.error(`${programErrors.usernameNotFound} ${programErrors.tryAgain}`);
 
   exit(0);
 };

@@ -90,7 +90,9 @@ const startFileManager = async () => {
         console.error(error?.message);
       }
     } else {
-      console.error(programErrors.invalidInput);
+      console.error(
+        `${programErrors.invalidInput} ${programErrors.commandNotFound} ${programErrors.tryAgain}`,
+      );
     }
   });
 
