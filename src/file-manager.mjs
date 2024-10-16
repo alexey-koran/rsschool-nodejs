@@ -10,7 +10,8 @@ import {
   programErrors,
 } from './messages.mjs';
 import { getUsernameFromArgv } from './utils/arguments.mjs';
-import { parseLine, validateFuncProps } from './utils.mjs';
+import { parseCommand } from './utils/parseCommand.mjs';
+import { validateFuncProps } from './utils.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsernameFromArgv(argv);
@@ -58,7 +59,7 @@ const startFileManager = async () => {
   const rl = createInterface({ input: stdin, output: stdout, prompt: '' });
 
   rl.on('line', async (line) => {
-    const { command, passedProps, passedFlags } = parseLine(line);
+    const { command, passedProps, passedFlags } = parseCommand(line);
 
     if (commandsMap[command]) {
       try {
