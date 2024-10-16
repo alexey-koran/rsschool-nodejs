@@ -2,12 +2,12 @@ import { rename as fsRename, access, constants } from 'node:fs/promises';
 
 const rename = async () => {
   try {
-    const properFileExists = await access(
+    const hasProperFile = await access(
       `${import.meta.dirname}/files/properFilename.md`,
       constants.R_OK | constants.W_OK,
     );
 
-    if (properFileExists === undefined) {
+    if (hasProperFile === undefined) {
       throw new Error('FS operation failed');
     }
   } catch (error) {
