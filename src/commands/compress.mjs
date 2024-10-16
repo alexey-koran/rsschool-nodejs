@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { createBrotliCompress } from 'node:zlib';
 
-import { validatePath } from '../utils.mjs';
+import { validatePath } from '../utils/validation.mjs';
 
 export const compress = async ({ passedProps, currentWorkingDirectory }) => {
   const pathToFile = passedProps[0];

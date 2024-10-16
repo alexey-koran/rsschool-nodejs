@@ -11,7 +11,7 @@ import {
 } from './messages.mjs';
 import { getUsernameFromArgv } from './utils/arguments.mjs';
 import { parseCommand } from './utils/parseCommand.mjs';
-import { validateFuncProps } from './utils.mjs';
+import { validateProps } from './utils/validation.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsernameFromArgv(argv);
@@ -65,7 +65,7 @@ const startFileManager = async () => {
       try {
         const { flags, mandatoryProperties, optionalProperties } = commandsMap[command];
 
-        await validateFuncProps({
+        await validateProps({
           flags,
           command,
           passedProps,

@@ -1,7 +1,7 @@
 import { cp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { validatePath } from '../utils.mjs';
+import { validatePath } from '../utils/validation.mjs';
 
 export const mv = async ({ passedProps, currentWorkingDirectory }) => {
   const pathToFile = passedProps[0];

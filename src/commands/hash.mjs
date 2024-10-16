@@ -2,7 +2,7 @@ import { createReadStream } from 'node:fs';
 import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 
-import { validatePath } from '../utils.mjs';
+import { validatePath } from '../utils/validation.mjs';
 
 export const hash = async ({ passedProps, currentWorkingDirectory }) => {
   const pathToFile = passedProps[0];

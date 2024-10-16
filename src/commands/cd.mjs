@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { validatePath } from '../utils.mjs';
+import { validatePath } from '../utils/validation.mjs';
 
 export const cd = async ({
   passedProps,
