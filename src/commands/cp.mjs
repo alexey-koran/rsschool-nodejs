@@ -1,5 +1,6 @@
-import { cp as fsCP } from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
 import { join } from 'node:path';
+import { pipeline } from 'node:stream/promises';
 
 import { validatePath } from '../utils.mjs';
 
@@ -13,9 +14,8 @@ export const cp = async ({ passedProps, currentWorkingDirectory }) => {
   await validatePath(sourcePath);
   await validatePath(destinationPath);
 
-  await fsCP(sourcePath, destinationPath, {
-    errorOnExist: true,
-    force: false,
-    recursive: true,
-  });
+  const sourceStream = createReadStream(sourcePath);
+  const destinationStream = createWriteStream(destinationPath);
+
+  await pipeline(sourceStream, destinationStream);
 };
