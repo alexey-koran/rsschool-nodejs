@@ -9,10 +9,11 @@ import {
   printWelcomeUser,
   programErrors,
 } from './messages.mjs';
-import { getUsername, parseLine, validateFuncProps } from './utils.mjs';
+import { getUsernameFromArgv } from './utils/arguments.mjs';
+import { parseLine, validateFuncProps } from './utils.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
-  const currentUsername = getUsername(argv);
+  const currentUsername = getUsernameFromArgv(argv);
 
   const programMessages = getProgramMessages(currentUsername);
 
