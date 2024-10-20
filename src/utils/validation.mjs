@@ -3,41 +3,44 @@ import { homedir } from 'node:os';
 
 import { programErrors } from '../messages.mjs';
 
-export const validateProps = async ({
-  flags,
+export const validateOptionsAndParameters = async ({
   command,
-  passedFlags,
-  passedProps,
-  mandatoryProperties,
-  optionalProperties,
+  passedOptions = [],
+  passedParameters = [],
+  options = {},
+  parameters = {},
 }) => {
-  const passedFlagsCount = passedFlags?.length;
-  const passedPropsCount = passedProps?.length;
+  const { mandatory, optional } = parameters;
 
-  const mandatoryPropertiesCount = mandatoryProperties?.length;
-  const optionalPropertiesCount = optionalProperties?.length;
-
-  const totalPropertiesCount = mandatoryPropertiesCount + optionalPropertiesCount;
-
-  const isSupportFlags = flags.support;
-
-  if (!isSupportFlags && passedFlagsCount) {
-    throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportFlags}`);
+  if (!options && passedOptions?.length) {
+    throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportOptions}`);
   }
 
-  if (passedPropsCount > totalPropertiesCount) {
+  const totalCount = mandatory?.length + optional?.length;
+
+  if (passedParameters?.length > totalCount) {
     throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
   }
 
-  if (mandatoryPropertiesCount && !passedPropsCount) {
-    throw new Error(
-      `${programErrors.invalidInput}\n${mandatoryProperties.join(', ').trim()} ${programErrors.notSpecified}`,
-    );
-  } else if (mandatoryPropertiesCount && passedPropsCount < mandatoryPropertiesCount) {
-    const notSpecifiedMandatoryFields = mandatoryProperties.slice(passedPropsCount);
+  if (mandatory?.length && !passedParameters?.length) {
+    const mandatoryFields = mandatory
+      .map((field) => field.description.text)
+      .join(', ')
+      .trim();
 
     throw new Error(
-      `${programErrors.invalidInput}\n${notSpecifiedMandatoryFields.join(', ').trim()} ${programErrors.notSpecified}`,
+      `${programErrors.invalidInput}\n${mandatoryFields} ${programErrors.notSpecified}`,
+    );
+  } else if (mandatory?.length && passedParameters?.length < mandatory?.length) {
+    const notSpecifiedMandatoryFields = mandatory.slice(passedParameters?.length);
+
+    const mandatoryFields = notSpecifiedMandatoryFields
+      .map((field) => field.description.text)
+      .join(', ')
+      .trim();
+
+    throw new Error(
+      `${programErrors.invalidInput}\n${mandatoryFields} ${programErrors.notSpecified}`,
     );
   }
 };
@@ -50,14 +53,14 @@ const checkPath = async (path) => {
   }
 };
 
-export const validatePath = async (path, options = { pingPath: false }) => {
+export const validatePath = async (path, options = { checkPath: false }) => {
   const homeDir = homedir();
 
   if (!path.startsWith(homeDir)) {
     throw new Error(programErrors.outOfRootDirectory);
   }
 
-  if (options.pingPath) {
+  if (options.checkPath) {
     await checkPath(path);
   }
 };

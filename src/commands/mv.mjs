@@ -1,14 +1,27 @@
 import { cp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { pathToFile, pathToNewDirectory } from '../parameters/index.mjs';
+import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../utils/validation.mjs';
 
-export const mv = async ({ passedProps, currentWorkingDirectory }) => {
-  const pathToFile = passedProps[0];
-  const pathToNewDirectory = passedProps[1];
+const parameters = {
+  mandatory: [pathToFile, pathToNewDirectory],
+};
 
-  const sourcePath = join(currentWorkingDirectory, pathToFile);
-  const destinationPath = join(currentWorkingDirectory, pathToNewDirectory);
+const help = {
+  usage: getCommandUsage('mv', [...parameters.mandatory]),
+  description: {
+    text: 'Move file',
+  },
+};
+
+const mv = async ({
+  passedParameters: [_pathToFile, _pathToNewDirectory],
+  currentWorkingDirectory,
+}) => {
+  const sourcePath = join(currentWorkingDirectory, _pathToFile);
+  const destinationPath = join(currentWorkingDirectory, _pathToNewDirectory);
 
   await validatePath(sourcePath);
   await validatePath(destinationPath);
@@ -21,4 +34,10 @@ export const mv = async ({ passedProps, currentWorkingDirectory }) => {
   });
 
   await rm(sourcePath);
+};
+
+export default {
+  func: mv,
+  parameters,
+  help,
 };

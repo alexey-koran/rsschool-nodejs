@@ -1,12 +1,23 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { pathToFile } from '../parameters/index.mjs';
+import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../utils/validation.mjs';
 
-export const cat = async ({ passedProps, currentWorkingDirectory }) => {
-  const pathToFile = passedProps[0];
+const parameters = {
+  mandatory: [pathToFile],
+};
 
-  const newPath = join(currentWorkingDirectory, pathToFile);
+const help = {
+  usage: getCommandUsage('cat', [...parameters.mandatory]),
+  description: {
+    text: "Read file and print it's content in console",
+  },
+};
+
+const cat = async ({ passedParameters: [_pathToFile], currentWorkingDirectory }) => {
+  const newPath = join(currentWorkingDirectory, _pathToFile);
 
   await validatePath(newPath);
 
@@ -15,4 +26,10 @@ export const cat = async ({ passedProps, currentWorkingDirectory }) => {
   });
 
   console.debug(fileContent);
+};
+
+export default {
+  func: cat,
+  parameters,
+  help,
 };

@@ -10,8 +10,9 @@ import {
   programErrors,
 } from './messages.mjs';
 import { getUsernameFromArgv } from './utils/arguments.mjs';
+import { getHelpMap } from './utils/help.mjs';
 import { parseCommand } from './utils/parseCommand.mjs';
-import { validateProps } from './utils/validation.mjs';
+import { validateOptionsAndParameters } from './utils/validation.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsernameFromArgv(argv);
@@ -30,15 +31,25 @@ const initFileManager = (currentWorkingDirectory) => {
 
 const handleCommand = async ({
   command,
-  passedProps,
-  passedFlags,
+  passedOptions,
+  passedParameters,
   programMessages,
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
-  const newWorkingDirectory = await commandsMap[command].func({
-    passedProps,
-    passedFlags,
+  const currentCommand = commandsMap[command];
+
+  let commandsHelp;
+  const isHelpCommand = command === 'help';
+
+  if (isHelpCommand) {
+    commandsHelp = getHelpMap(commandsMap);
+  }
+
+  const newWorkingDirectory = await currentCommand.func({
+    ...(isHelpCommand && { commandsHelp }),
+    passedOptions,
+    passedParameters,
     programMessages,
     currentWorkingDirectory,
     changeCurrentWorkingDirectory,
@@ -59,26 +70,25 @@ const startFileManager = async () => {
   const readLine = createInterface({ input: stdin, output: stdout, prompt: '' });
 
   readLine.on('line', async (line) => {
-    const { command, passedProps, passedFlags } = parseCommand(line);
+    const { command, passedParameters, passedOptions } = parseCommand(line);
 
     if (commandsMap[command]) {
       try {
-        const { flags, mandatoryProperties, optionalProperties } = commandsMap[command];
+        const { options, parameters } = commandsMap[command];
 
-        await validateProps({
-          flags,
+        await validateOptionsAndParameters({
           command,
-          passedProps,
-          passedFlags,
-          mandatoryProperties,
-          optionalProperties,
+          options,
+          parameters,
+          passedOptions,
+          passedParameters,
         });
 
         try {
           await handleCommand({
             command,
-            passedProps,
-            passedFlags,
+            passedOptions,
+            passedParameters,
             programMessages,
             currentWorkingDirectory,
             changeCurrentWorkingDirectory,

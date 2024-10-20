@@ -1,44 +1,42 @@
-const splitProps = (props) => props.split(' ');
+const splitParameters = (parameters) => parameters.split(' ');
 
 export const parseCommand = (line) => {
   const trimmedLine = line.trim();
 
-  const hasParams = trimmedLine.includes(' ');
+  const hasOptionsOrParameters = trimmedLine.includes(' ');
 
-  if (hasParams) {
+  if (hasOptionsOrParameters) {
     const command = trimmedLine.slice(0, trimmedLine.indexOf(' '));
 
-    const flagsAndProps = trimmedLine.slice(trimmedLine.indexOf(' ') + 1);
+    const optionsAndParameters = trimmedLine.slice(trimmedLine.indexOf(' ') + 1);
 
-    const passedFlags = flagsAndProps.match(/--\w*\s?/g);
+    const options = optionsAndParameters.match(/--\w*\s?/g);
 
-    if (passedFlags?.length > 0) {
-      const propsWithoutFlags = passedFlags?.reduce(
+    if (options?.length > 0) {
+      const onlyParameters = options?.reduce(
         (acc, curr) => acc.replace(curr, ''),
-        flagsAndProps,
+        optionsAndParameters,
       );
 
-      const passedProps = splitProps(propsWithoutFlags);
+      const passedParameters = splitParameters(onlyParameters);
+      const passedOptions = options.map((option) => option.replace('--', ''));
 
       return {
         command,
-        passedProps,
-        passedFlags,
+        passedParameters,
+        passedOptions,
       };
     }
 
-    const passedProps = splitProps(flagsAndProps);
+    const passedParameters = splitParameters(optionsAndParameters);
 
     return {
       command,
-      passedFlags,
-      passedProps,
+      passedParameters,
     };
   }
 
   return {
     command: trimmedLine,
-    passedProps: null,
-    passedFlags: null,
   };
 };

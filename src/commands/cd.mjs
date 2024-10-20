@@ -1,19 +1,37 @@
 import { join } from 'node:path';
 
+import { pathToDirectory } from '../parameters/index.mjs';
+import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../utils/validation.mjs';
 
-export const cd = async ({
-  passedProps,
+const parameters = {
+  mandatory: [pathToDirectory],
+};
+
+const help = {
+  usage: getCommandUsage('cd', [...parameters.mandatory]),
+  description: {
+    text: 'Go to dedicated folder from current directory',
+    hint: '(<path_to_directory> can be relative or absolute)',
+  },
+};
+
+const cd = async ({
+  passedParameters: [_pathToDirectory],
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
-  const pathToDirectory = passedProps[0];
+  const newPath = join(currentWorkingDirectory, _pathToDirectory);
 
-  const newPath = join(currentWorkingDirectory, pathToDirectory);
-
-  await validatePath(newPath, { pingPath: true });
+  await validatePath(newPath, { checkPath: true });
 
   changeCurrentWorkingDirectory(newPath);
 
   return newPath;
+};
+
+export default {
+  func: cd,
+  parameters,
+  help,
 };

@@ -3,14 +3,27 @@ import { join } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { createBrotliDecompress } from 'node:zlib';
 
+import { pathToFile, pathToDestination } from '../parameters/index.mjs';
+import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../utils/validation.mjs';
 
-export const decompress = async ({ passedProps, currentWorkingDirectory }) => {
-  const pathToFile = passedProps[0];
-  const pathToDestination = passedProps[1];
+const parameters = {
+  mandatory: [pathToFile, pathToDestination],
+};
 
-  const sourcePath = join(currentWorkingDirectory, pathToFile);
-  const destinationPath = join(currentWorkingDirectory, pathToDestination);
+const help = {
+  usage: getCommandUsage('decompress', [...parameters.mandatory]),
+  description: {
+    text: 'Decompress file',
+  },
+};
+
+const decompress = async ({
+  passedParameters: [_pathToFile, _pathToDestination],
+  currentWorkingDirectory,
+}) => {
+  const sourcePath = join(currentWorkingDirectory, _pathToFile);
+  const destinationPath = join(currentWorkingDirectory, _pathToDestination);
 
   await validatePath(sourcePath);
   await validatePath(destinationPath);
@@ -21,4 +34,10 @@ export const decompress = async ({ passedProps, currentWorkingDirectory }) => {
   const destinationStream = createWriteStream(destinationPath);
 
   await pipeline(sourceStream, brotliDecompress, destinationStream);
+};
+
+export default {
+  func: decompress,
+  parameters,
+  help,
 };

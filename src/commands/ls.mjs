@@ -1,6 +1,13 @@
 import { readdir } from 'node:fs/promises';
 
-export const ls = async ({ currentWorkingDirectory }) => {
+const help = {
+  usage: 'ls',
+  description: {
+    text: 'Print in console list of all files and folders in current directory',
+  },
+};
+
+const ls = async ({ currentWorkingDirectory }) => {
   const dirList = await readdir(currentWorkingDirectory, { withFileTypes: true });
 
   const tableList = dirList.map((element) => {
@@ -14,4 +21,9 @@ export const ls = async ({ currentWorkingDirectory }) => {
   });
 
   console.table(tableList.sort((a, b) => (a.type > b.type ? 1 : -1)));
+};
+
+export default {
+  func: ls,
+  help,
 };

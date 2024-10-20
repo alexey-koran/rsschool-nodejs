@@ -1,7 +1,25 @@
 import { writeFile } from 'node:fs/promises';
 
-export const add = async ({ passedProps, currentWorkingDirectory }) => {
-  const fileName = passedProps[0];
+import { newFileName } from '../parameters/index.mjs';
+import { getCommandUsage } from '../utils/commandUsage.mjs';
 
-  await writeFile(`${currentWorkingDirectory}/${fileName}`, '', { flag: 'wx' });
+const parameters = {
+  mandatory: [newFileName],
+};
+
+const help = {
+  usage: getCommandUsage('add', [...parameters.mandatory]),
+  description: {
+    text: 'Create empty file in current working directory',
+  },
+};
+
+const add = async ({ passedParameters: [_fileName], currentWorkingDirectory }) => {
+  await writeFile(`${currentWorkingDirectory}/${_fileName}`, '', { flag: 'wx' });
+};
+
+export default {
+  func: add,
+  parameters,
+  help,
 };

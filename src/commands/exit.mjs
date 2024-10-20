@@ -1,7 +1,19 @@
 import { exit as exitProcess } from 'node:process';
 
-export const exit = ({ programMessages }) => {
+const help = {
+  usage: '.exit',
+  description: {
+    text: 'Exit program',
+  },
+};
+
+const exit = ({ programMessages }) => {
   console.debug(`${programMessages.goodbye}`);
 
   exitProcess(0);
+};
+
+export default {
+  func: exit,
+  help,
 };

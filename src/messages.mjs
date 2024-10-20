@@ -4,7 +4,7 @@ export const programErrors = {
   invalidInput: 'Invalid input',
   operationFailed: 'Operation failed',
   outOfRootDirectory: "You can't go upper than root directory",
-  notSupportFlags: 'command does not support flags',
+  notSupportOptions: 'command does not support options',
   notSpecified: 'not specified',
   tooMuchArguments: 'Too much arguments',
   commandNotFound: 'Command not found',
