@@ -1,7 +1,7 @@
-import nodeOs from 'node:os';
+import { EOL, cpus, homedir, userInfo, arch } from 'node:os';
 
 const options = {
-  eol: '--EOL',
+  EOL: '--EOL',
   cpus: '--cpus',
   homedir: '--homedir',
   username: '--username',
@@ -11,8 +11,8 @@ const options = {
 const help = {
   usage: 'os',
   options: {
-    eol: {
-      usage: `os ${options.eol}`,
+    EOL: {
+      usage: `os ${options.EOL}`,
       description: {
         text: 'Get EOL (default system End-Of-Line) and print it to console',
       },
@@ -48,21 +48,51 @@ const help = {
   },
 };
 
+const printEol = () => {
+  console.debug(`EOL = ${JSON.stringify(EOL)}`);
+};
+
+const printCpusInfo = () => {
+  const cpusInfo = cpus();
+
+  const cpuList = cpusInfo.map((cpu) => ({
+    Model: cpu.model.trim(),
+    'Clock rate (GHz)': cpu.speed / 1000,
+  }));
+
+  console.debug(`Overall amount of CPUS: ${cpuList.length}`);
+  console.table(cpuList);
+};
+
+const printHomeDir = () => {
+  console.debug(`Homedir = ${homedir()}`);
+};
+
+const printUsername = () => {
+  console.debug(`Username = ${userInfo().username}`);
+};
+
+const printArchitecture = () => {
+  console.debug(`Architecture = ${arch()}`);
+};
+
 const osMap = {
-  eol: JSON.stringify(nodeOs.EOL),
-  cpus: nodeOs.cpus(),
-  homedir: nodeOs.homedir(),
-  username: nodeOs.userInfo().username,
-  architecture: nodeOs.arch(),
+  EOL: printEol,
+  cpus: printCpusInfo,
+  homedir: printHomeDir,
+  username: printUsername,
+  architecture: printArchitecture,
 };
 
 const os = ({ passedOptions }) => {
   if (passedOptions?.length > 0) {
     passedOptions.forEach((option) => {
-      console.debug(osMap[`${option}`]);
+      osMap[option]();
     });
   } else {
-    console.debug(osMap);
+    Object.keys(osMap).forEach((key) => {
+      osMap[key]();
+    });
   }
 };
 
