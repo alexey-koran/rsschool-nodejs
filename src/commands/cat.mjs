@@ -1,5 +1,7 @@
-import { readFile } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
 import { join } from 'node:path';
+import { stdout } from 'node:process';
+import { pipeline } from 'node:stream/promises';
 
 import { pathToFile } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
@@ -17,15 +19,13 @@ const help = {
 };
 
 const cat = async ({ passedParameters: [_pathToFile], currentWorkingDirectory }) => {
-  const newPath = join(currentWorkingDirectory, _pathToFile);
+  const filePath = join(currentWorkingDirectory, _pathToFile);
 
-  await validatePath(newPath);
+  await validatePath(filePath);
 
-  const fileContent = await readFile(newPath, {
-    encoding: 'utf8',
-  });
+  const sourceStream = createReadStream(filePath);
 
-  console.debug(fileContent);
+  await pipeline(sourceStream, stdout, { end: false });
 };
 
 export default {
