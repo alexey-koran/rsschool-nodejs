@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { validatePath } from '../utils/validation.mjs';
+import { validatePath } from '../validation/index.mjs';
 
 const help = {
   usage: 'up',

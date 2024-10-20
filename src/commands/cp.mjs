@@ -4,7 +4,7 @@ import { pipeline } from 'node:stream/promises';
 
 import { pathToFile, pathToNewDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
-import { validatePath } from '../utils/validation.mjs';
+import { validatePath } from '../validation/index.mjs';
 
 const parameters = {
   mandatory: [pathToFile, pathToNewDirectory],

@@ -2,7 +2,7 @@ import { join, isAbsolute } from 'node:path';
 
 import { pathToDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
-import { validatePath } from '../utils/validation.mjs';
+import { validatePath } from '../validation/index.mjs';
 
 const parameters = {
   mandatory: [pathToDirectory],

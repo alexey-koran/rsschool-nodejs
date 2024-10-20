@@ -12,7 +12,7 @@ import {
 import { getUsernameFromArgv } from './utils/arguments.mjs';
 import { getHelpMap } from './utils/help.mjs';
 import { parseCommand } from './utils/parseCommand.mjs';
-import { validateOptionsAndParameters } from './utils/validation.mjs';
+import { validateOptionsAndParameters } from './validation/index.mjs';
 
 const initFileManager = (currentWorkingDirectory) => {
   const currentUsername = getUsernameFromArgv(argv);
