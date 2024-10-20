@@ -5,6 +5,8 @@ import { sep } from 'node:path';
 await import('./files/c.js');
 
 const random = Math.random();
+const currentDirname = import.meta.dirname;
+const currentFileName = import.meta.filename;
 
 let unknownObject;
 
@@ -18,8 +20,8 @@ console.debug(`Release ${release()}`);
 console.debug(`Version ${version()}`);
 console.debug(`Path segment separator is "${sep}"`);
 
-console.debug(`Path to current file is ${import.meta.filename}`);
-console.debug(`Path to current directory is ${import.meta.dirname}`);
+console.debug(`Path to current file is ${currentFileName}`);
+console.debug(`Path to current directory is ${currentDirname}`);
 
 const myServer = createServerHttp((_, res) => {
   res.end('Request accepted');

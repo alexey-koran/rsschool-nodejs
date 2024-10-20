@@ -2,7 +2,9 @@ import { readFile } from 'node:fs/promises';
 
 const read = async () => {
   try {
-    const fileContent = await readFile(`${import.meta.dirname}/files/fileToRead.txt`, {
+    const currentDirname = import.meta.dirname;
+
+    const fileContent = await readFile(`${currentDirname}/files/fileToRead.txt`, {
       encoding: 'utf8',
     });
 

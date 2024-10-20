@@ -4,10 +4,12 @@ import { createUnzip } from 'node:zlib';
 
 const decompress = async () => {
   try {
+    const currentDirname = import.meta.dirname;
+
     const unGzip = createUnzip();
 
-    const source = createReadStream(`${import.meta.dirname}/files/archive.gz`);
-    const destination = createWriteStream(`${import.meta.dirname}/files/fileToCompress.txt`);
+    const source = createReadStream(`${currentDirname}/files/archive.gz`);
+    const destination = createWriteStream(`${currentDirname}/files/fileToCompress.txt`);
 
     await pipeline(source, unGzip, destination);
   } catch (error) {
