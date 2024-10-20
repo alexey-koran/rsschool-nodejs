@@ -1,5 +1,6 @@
 import { fork } from 'node:child_process';
 import { stdin, stdout } from 'node:process';
+import { pipeline } from 'node:stream/promises';
 
 const spawnChildProcess = async (args) => {
   const controller = new AbortController();
@@ -8,8 +9,9 @@ const spawnChildProcess = async (args) => {
 
   const childProcess = fork(`${currentDirname}/files/script.js`, [...args], { silent: true });
 
-  stdin.pipe(childProcess.stdin);
-  childProcess.stdout.pipe(stdout);
+  pipeline(stdin, childProcess.stdin);
+
+  pipeline(childProcess.stdout, stdout);
 
   childProcess.on('error', (err) => {
     throw new Error(err);
