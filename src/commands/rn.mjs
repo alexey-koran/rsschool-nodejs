@@ -18,11 +18,13 @@ const help = {
 };
 
 const rn = async ({ passedParameters: [_pathToFile, _fileName], currentWorkingDirectory }) => {
-  const newFilePath = join(currentWorkingDirectory, _pathToFile);
+  const pathToFile = join(currentWorkingDirectory, _pathToFile);
+  const newFilePath = join(currentWorkingDirectory, _fileName);
 
+  await validatePath(pathToFile);
   await validatePath(newFilePath);
 
-  await fsRename(newFilePath, _fileName);
+  await fsRename(pathToFile, newFilePath);
 };
 
 export default {
