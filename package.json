@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/alexey-koran/node-file-manager/issues"
   },
-  "homepage": "https://github.com/alexey-koran/node-file-manager#readme"
+  "homepage": "https://github.com/alexey-koran/node-file-manager#readme",
+  "devDependencies": {
+    "@alexey-koran/eslint-config": "^0.2.2",
+    "@alexey-koran/prettier-config": "^0.1.1",
+    "@alexey-koran/tsconfig": "^0.1.0",
+    "@types/node": "^22.7.5",
+    "prettier": "^3.3.3"
+  }
 }
