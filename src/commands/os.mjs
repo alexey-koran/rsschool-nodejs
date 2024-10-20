@@ -52,7 +52,7 @@ const osMap = {
   eol: JSON.stringify(nodeOs.EOL),
   cpus: nodeOs.cpus(),
   homedir: nodeOs.homedir(),
-  username: nodeOs.userInfo(),
+  username: nodeOs.userInfo().username,
   architecture: nodeOs.arch(),
 };
 
