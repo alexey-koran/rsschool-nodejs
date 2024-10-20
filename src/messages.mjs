@@ -30,5 +30,5 @@ export const printWelcomeUser = (programMessages) => {
 };
 
 export const printWorkingDirectory = (workingDirectory) => {
-  console.debug(`You are currently in ${workingDirectory}\n`);
+  console.debug(`\nYou are currently in ${workingDirectory}\n`);
 };
