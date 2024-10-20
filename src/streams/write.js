@@ -2,7 +2,9 @@ import { createWriteStream } from 'node:fs';
 import { stdin } from 'node:process';
 
 const write = async () => {
-  const writeableStream = createWriteStream(`${import.meta.dirname}/files/fileToWrite.txt`);
+  const currentDirname = import.meta.dirname;
+
+  const writeableStream = createWriteStream(`${currentDirname}/files/fileToWrite.txt`);
 
   stdin.pipe(writeableStream);
 };

@@ -4,9 +4,11 @@ import { stdout } from 'node:process';
 const calculateHash = async () => {
   const { createHash } = await import('node:crypto');
 
+  const currentDirname = import.meta.dirname;
+
   const hash = createHash('sha256');
 
-  const input = createReadStream(`${import.meta.dirname}/files/fileToCalculateHashFor.txt`);
+  const input = createReadStream(`${currentDirname}/files/fileToCalculateHashFor.txt`);
 
   input.pipe(hash).setEncoding('hex').pipe(stdout);
 };

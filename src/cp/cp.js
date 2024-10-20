@@ -4,7 +4,9 @@ import { stdin, stdout } from 'node:process';
 const spawnChildProcess = async (args) => {
   const controller = new AbortController();
 
-  const childProcess = fork(`${import.meta.dirname}/files/script.js`, [...args], { silent: true });
+  const currentDirname = import.meta.dirname;
+
+  const childProcess = fork(`${currentDirname}/files/script.js`, [...args], { silent: true });
 
   stdin.pipe(childProcess.stdin);
   childProcess.stdout.pipe(stdout);
