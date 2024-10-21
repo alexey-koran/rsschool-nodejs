@@ -63,7 +63,7 @@ describe('throttledGetDataFromApi', () => {
   });
 
   test('should return response data', async () => {
-    expect(throttledGetDataFromApi(relativePath)).resolves.toEqual(
+    expect(throttledGetDataFromApi(relativePath)).resolves.toStrictEqual(
       mockedResponse,
     );
   });
