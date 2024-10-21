@@ -1,4 +1,4 @@
-# Assignment: Basic testing
+# Assignment: Node.js Basic testing
 
 ⚠️ DO NOT SUBMIT PULL REQUESTS TO THIS REPO ⚠️
 
