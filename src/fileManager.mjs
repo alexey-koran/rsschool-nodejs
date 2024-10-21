@@ -55,7 +55,7 @@ const handleCommand = async ({
     changeCurrentWorkingDirectory,
   });
 
-  printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
+  return newWorkingDirectory;
 };
 
 const startFileManager = async () => {
@@ -85,7 +85,7 @@ const startFileManager = async () => {
         });
 
         try {
-          await handleCommand({
+          const newWorkingDirectory = await handleCommand({
             command,
             passedOptions,
             passedParameters,
@@ -95,6 +95,8 @@ const startFileManager = async () => {
           });
 
           console.debug(`${command} ${programMessages.operationSuccessful}\n`);
+
+          printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
           console.error(`${programErrors.operationFailed}. \n${error?.message}`);
         }
