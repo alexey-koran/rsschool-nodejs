@@ -1,4 +1,3 @@
-// Uncomment the code below and write your tests
 import fs from 'node:fs';
 import path from 'node:path';
 

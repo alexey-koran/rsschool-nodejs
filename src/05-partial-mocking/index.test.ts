@@ -1,4 +1,3 @@
-// Uncomment the code below and write your tests
 import { mockOne, mockTwo, mockThree, unmockedFunction } from './index';
 
 jest.mock('./index', () => {

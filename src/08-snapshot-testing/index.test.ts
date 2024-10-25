@@ -1,4 +1,3 @@
-// Uncomment the code below and write your tests
 import { generateLinkedList } from './index';
 
 const firstValues = [1, 2, 3, 4, 5];
