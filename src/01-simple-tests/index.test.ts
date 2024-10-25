@@ -3,70 +3,134 @@ import { simpleCalculator, Action } from './index';
 
 describe('simpleCalculator tests', () => {
   test('should add two numbers', () => {
-    const a = 1;
-    const b = 2;
-    const expectedResult = a + b;
+    const getExpectedResult = (a: number, b: number) => a + b;
 
-    const result = simpleCalculator({ a, b, action: Action.Add });
+    expect(simpleCalculator({ a: 1, b: 2, action: Action.Add })).toBe(
+      getExpectedResult(1, 2),
+    );
 
-    expect(result).toBe(expectedResult);
+    expect(simpleCalculator({ a: -5, b: 6, action: Action.Add })).toBe(
+      getExpectedResult(-5, 6),
+    );
+
+    expect(simpleCalculator({ a: 6, b: -5, action: Action.Add })).toBe(
+      getExpectedResult(6, -5),
+    );
+
+    expect(simpleCalculator({ a: -5, b: -6, action: Action.Add })).toBe(
+      getExpectedResult(-5, -6),
+    );
   });
 
   test('should subtract two numbers', () => {
-    const a = 10;
-    const b = 5;
-    const expectedResult = a - b;
+    const getExpectedResult = (a: number, b: number) => a - b;
 
-    const result = simpleCalculator({ a, b, action: Action.Subtract });
+    expect(simpleCalculator({ a: 1, b: 2, action: Action.Subtract })).toBe(
+      getExpectedResult(1, 2),
+    );
 
-    expect(result).toBe(expectedResult);
+    expect(simpleCalculator({ a: -5, b: 6, action: Action.Subtract })).toBe(
+      getExpectedResult(-5, 6),
+    );
+
+    expect(simpleCalculator({ a: 6, b: -5, action: Action.Subtract })).toBe(
+      getExpectedResult(6, -5),
+    );
+
+    expect(simpleCalculator({ a: -5, b: -6, action: Action.Subtract })).toBe(
+      getExpectedResult(-5, -6),
+    );
   });
 
   test('should multiply two numbers', () => {
-    const a = 3;
-    const b = 2;
-    const expectedResult = a * b;
+    const getExpectedResult = (a: number, b: number) => a * b;
 
-    const result = simpleCalculator({ a, b, action: Action.Multiply });
+    expect(simpleCalculator({ a: 1, b: 2, action: Action.Multiply })).toBe(
+      getExpectedResult(1, 2),
+    );
 
-    expect(result).toBe(expectedResult);
+    expect(simpleCalculator({ a: -5, b: 6, action: Action.Multiply })).toBe(
+      getExpectedResult(-5, 6),
+    );
+
+    expect(simpleCalculator({ a: 6, b: -5, action: Action.Multiply })).toBe(
+      getExpectedResult(6, -5),
+    );
+
+    expect(simpleCalculator({ a: -5, b: -6, action: Action.Multiply })).toBe(
+      getExpectedResult(-5, -6),
+    );
   });
 
   test('should divide two numbers', () => {
-    const a = 10;
-    const b = 5;
-    const expectedResult = a / b;
+    const getExpectedResult = (a: number, b: number) => a / b;
 
-    const result = simpleCalculator({ a, b, action: Action.Divide });
+    expect(simpleCalculator({ a: 1, b: 2, action: Action.Divide })).toBe(
+      getExpectedResult(1, 2),
+    );
 
-    expect(result).toBe(expectedResult);
+    expect(simpleCalculator({ a: -5, b: 6, action: Action.Divide })).toBe(
+      getExpectedResult(-5, 6),
+    );
+
+    expect(simpleCalculator({ a: 6, b: -5, action: Action.Divide })).toBe(
+      getExpectedResult(6, -5),
+    );
+
+    expect(simpleCalculator({ a: -5, b: -6, action: Action.Divide })).toBe(
+      getExpectedResult(-5, -6),
+    );
   });
 
   test('should exponentiate two numbers', () => {
-    const a = 10;
-    const b = 5;
-    const expectedResult = Math.pow(a, b);
+    const getExpectedResult = (a: number, b: number) => Math.pow(a, b);
 
-    const result = simpleCalculator({ a, b, action: Action.Exponentiate });
+    expect(simpleCalculator({ a: 1, b: 2, action: Action.Exponentiate })).toBe(
+      getExpectedResult(1, 2),
+    );
 
-    expect(result).toBe(expectedResult);
+    expect(simpleCalculator({ a: -5, b: 6, action: Action.Exponentiate })).toBe(
+      getExpectedResult(-5, 6),
+    );
+
+    expect(simpleCalculator({ a: 6, b: -5, action: Action.Exponentiate })).toBe(
+      getExpectedResult(6, -5),
+    );
+
+    expect(
+      simpleCalculator({ a: -5, b: -6, action: Action.Exponentiate }),
+    ).toBe(getExpectedResult(-5, -6));
   });
 
   test('should return null for invalid action', () => {
-    const a = 10;
-    const b = 5;
-
-    const result = simpleCalculator({ a, b, action: 'invalidAction' });
-
-    expect(result).toBeNull();
+    expect(
+      simpleCalculator({ a: 1, b: 2, action: 'invalidAction' }),
+    ).toBeNull();
   });
 
   test('should return null for invalid arguments', () => {
-    const a = null;
-    const b = 5;
+    expect(
+      simpleCalculator({ a: null, b: 2, action: Action.Divide }),
+    ).toBeNull();
 
-    const result = simpleCalculator({ a, b, action: Action.Divide });
+    expect(
+      simpleCalculator({ a: 1, b: null, action: Action.Divide }),
+    ).toBeNull();
 
-    expect(result).toBeNull();
+    expect(
+      simpleCalculator({ a: undefined, b: 2, action: Action.Divide }),
+    ).toBeNull();
+
+    expect(
+      simpleCalculator({ a: 1, b: undefined, action: Action.Divide }),
+    ).toBeNull();
+
+    expect(
+      simpleCalculator({ a: '1', b: '2', action: Action.Divide }),
+    ).toBeNull();
+
+    expect(
+      simpleCalculator({ a: 'a', b: 'b', action: Action.Divide }),
+    ).toBeNull();
   });
 });
