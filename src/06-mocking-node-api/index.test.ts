@@ -97,7 +97,7 @@ describe('readFileAsynchronously', () => {
 
     spyExistsSync.mockReturnValueOnce(false);
 
-    await expect(readFileAsynchronously(pathToFile)).resolves.toBeNull();
+    expect(readFileAsynchronously(pathToFile)).resolves.toBeNull();
   });
 
   test('should return file content if file exists', async () => {
@@ -110,6 +110,6 @@ describe('readFileAsynchronously', () => {
 
     spyReadFile.mockResolvedValue(fileContent);
 
-    await expect(readFileAsynchronously(pathToFile)).resolves.toBe(fileContent);
+    expect(readFileAsynchronously(pathToFile)).resolves.toBe(fileContent);
   });
 });
