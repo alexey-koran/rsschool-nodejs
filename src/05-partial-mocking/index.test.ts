@@ -23,12 +23,9 @@ describe('partial mocking', () => {
     const spyConsoleLog = jest.spyOn(console, 'log');
 
     mockOne();
-    expect(spyConsoleLog).toHaveBeenCalledTimes(0);
-
     mockTwo();
-    expect(spyConsoleLog).toHaveBeenCalledTimes(0);
-
     mockThree();
+
     expect(spyConsoleLog).toHaveBeenCalledTimes(0);
   });
 
