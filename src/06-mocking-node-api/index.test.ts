@@ -9,10 +9,8 @@ const jestCallBack = jest.fn(callBack);
 const time = 1000;
 
 describe('doStuffByTimeout', () => {
-  let spyTimeout: jest.SpyInstance;
-
   beforeEach(() => {
-    spyTimeout = jest.spyOn(global, 'setTimeout');
+    jest.clearAllTimers();
   });
 
   beforeAll(() => {
@@ -24,10 +22,12 @@ describe('doStuffByTimeout', () => {
   });
 
   test('should set timeout with provided callback and timeout', () => {
-    doStuffByTimeout(callBack, time);
+    const spyTimeout = jest.spyOn(global, 'setTimeout');
+
+    doStuffByTimeout(jestCallBack, time);
 
     expect(spyTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenCalledWith(callBack, time);
+    expect(spyTimeout).toHaveBeenCalledWith(jestCallBack, time);
   });
 
   test('should call callback only after timeout', () => {
@@ -43,10 +43,8 @@ describe('doStuffByTimeout', () => {
 });
 
 describe('doStuffByInterval', () => {
-  let spyInterval: jest.SpyInstance;
-
   beforeEach(() => {
-    spyInterval = jest.spyOn(global, 'setInterval');
+    jest.clearAllTimers();
   });
 
   beforeAll(() => {
@@ -58,10 +56,12 @@ describe('doStuffByInterval', () => {
   });
 
   test('should set interval with provided callback and timeout', () => {
-    doStuffByInterval(callBack, time);
+    const spyInterval = jest.spyOn(global, 'setInterval');
+
+    doStuffByInterval(jestCallBack, time);
 
     expect(spyInterval).toHaveBeenCalledTimes(1);
-    expect(setInterval).toHaveBeenCalledWith(callBack, time);
+    expect(spyInterval).toHaveBeenCalledWith(jestCallBack, time);
   });
 
   test('should call callback multiple times after multiple intervals', () => {
