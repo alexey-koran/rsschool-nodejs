@@ -10,7 +10,7 @@ describe('resolveValue', () => {
   test('should resolve provided value', async () => {
     const value = 10;
 
-    await expect(resolveValue(value)).resolves.toBe(value);
+    expect(resolveValue(value)).resolves.toBe(value);
   });
 });
 
