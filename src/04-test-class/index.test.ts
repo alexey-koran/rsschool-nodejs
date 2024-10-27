@@ -26,14 +26,14 @@ describe('BankAccount', () => {
 
   test('should throw InsufficientFundsError error when withdrawing more than balance', () => {
     expect(() => firstBankAccount.withdraw(initialBalance * 5)).toThrow(
-      InsufficientFundsError,
+      new InsufficientFundsError(initialBalance),
     );
   });
 
   test('should throw error when transferring more than balance', () => {
     expect(() =>
       firstBankAccount.transfer(initialBalance * 5, secondBankAccount),
-    ).toThrow(InsufficientFundsError);
+    ).toThrow(new InsufficientFundsError(initialBalance));
   });
 
   test('should throw error when transferring to the same account', () => {
