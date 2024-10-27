@@ -86,6 +86,7 @@ describe('readFileAsynchronously', () => {
   test('should call join with pathToFile', async () => {
     const spyJoin = jest.spyOn(path, 'join');
 
+    jest.spyOn(fs, 'existsSync').mockReturnValueOnce(false);
     readFileAsynchronously(pathToFile);
 
     expect(spyJoin).toHaveBeenCalled();
