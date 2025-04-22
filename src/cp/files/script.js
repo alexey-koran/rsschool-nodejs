@@ -12,7 +12,7 @@ const echoInput = (chunk) => {
     exit(0);
   }
 
-  stdout.write(`Received from master process: ${chunk.toString()}\n`);
+  stdout.write(`Received from master process: ${chunk.toString()}`);
 };
 
 stdin.on('data', echoInput);
