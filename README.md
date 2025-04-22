@@ -1,4 +1,4 @@
-# Assignment: Node.js basics
+# Assignment: Node.js Basics
 
 ## Description
 
