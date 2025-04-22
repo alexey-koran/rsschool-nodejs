@@ -5,8 +5,9 @@ import { pipeline } from 'node:stream/promises';
 const transform = async () => {
   const transformStream = new Transform({
     transform(buffer, encoding, next) {
-      const reversed = buffer.toString().split('').reverse().join('');
-      transformStream.push(`${reversed}\n\n`);
+      const input = buffer.toString().trim();
+      const reversed = input.split('').reverse().join('');
+      transformStream.push(`${reversed}\n`);
       next();
     },
   });
