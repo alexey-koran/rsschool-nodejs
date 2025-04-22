@@ -2,7 +2,7 @@ import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
 import { sep } from 'node:path';
 
-await import('./files/c.js');
+await import('./files/c.cjs');
 
 const random = Math.random();
 const currentDirname = import.meta.dirname;
