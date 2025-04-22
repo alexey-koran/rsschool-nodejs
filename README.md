@@ -4,5 +4,10 @@ This monorepo contains solutions for `RS School Node.js` [assignments](https://g
 
 ## Tasks
 
-| Task                         | Path                                                        | Branch                                                                        |
-| ---------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Task             | Path                             | Branch                                   | Link                                                                                                               |
+| ---------------- | -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `Node.js Basics` | [nodejs-basics](./nodejs-basics) | [nodejs-basics](../..nodejs-basics-fork) | [Assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/nodejs-basics/assignment.md) |
+
+## License
+
+[MIT](./LICENSE)
