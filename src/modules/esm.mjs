@@ -8,7 +8,9 @@ const random = Math.random();
 const currentDirname = import.meta.dirname;
 const currentFileName = import.meta.filename;
 
-const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', { with: { type: 'json' } });
+const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', {
+  with: { type: 'json' },
+});
 
 console.debug(`Release ${release()}`);
 console.debug(`Version ${version()}`);
@@ -23,7 +25,7 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.debug(unknownObject);
+console.debug({ default: unknownObject.default });
 
 myServer.listen(PORT, () => {
   console.debug(`Server is listening on port ${PORT}`);
