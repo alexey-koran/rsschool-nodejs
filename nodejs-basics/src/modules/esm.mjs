@@ -2,19 +2,15 @@ import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
 import { sep } from 'node:path';
 
-await import('./files/c.cjs');
+const cFile = await import('./files/c.cjs');
 
 const random = Math.random();
 const currentDirname = import.meta.dirname;
 const currentFileName = import.meta.filename;
 
-let unknownObject;
-
-if (random > 0.5) {
-  unknownObject = await import('./files/a.json', { with: { type: 'json' } });
-} else {
-  unknownObject = await import('./files/b.json', { with: { type: 'json' } });
-}
+const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', {
+  with: { type: 'json' },
+});
 
 console.debug(`Release ${release()}`);
 console.debug(`Version ${version()}`);
@@ -29,7 +25,7 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.debug(unknownObject);
+console.debug({ default: unknownObject.default });
 
 myServer.listen(PORT, () => {
   console.debug(`Server is listening on port ${PORT}`);
