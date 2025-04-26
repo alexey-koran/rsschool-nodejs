@@ -48,8 +48,10 @@
     "@alexey-koran/eslint-config": "^0.3.0",
     "@alexey-koran/prettier-config": "^0.1.1",
     "@alexey-koran/tsconfig": "^0.1.0",
-    "@types/node": "^22.14.1",
+    "@eslint/js": "^9.25.1",
+    "@types/node": "^22.15.2",
     "cross-env": "^7.0.3",
+    "eslint": "^9.25.1",
     "prettier": "^3.5.3"
   },
   "pnpm": {
