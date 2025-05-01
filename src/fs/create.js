@@ -4,9 +4,7 @@ const fileContent = 'I am fresh and young';
 
 const create = async () => {
   try {
-    const currentDirname = import.meta.dirname;
-
-    await writeFile(`${currentDirname}/files/fresh.txt`, fileContent, { flag: 'wx' });
+    await writeFile(`${import.meta.dirname}/files/fresh.txt`, fileContent, { flag: 'wx' });
   } catch (_error) {
     throw new Error('FS operation failed');
   }
