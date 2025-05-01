@@ -1,5 +1,4 @@
 import { createReadStream } from 'node:fs';
-import { stdout } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 
 const calculateHash = async () => {
@@ -11,7 +10,9 @@ const calculateHash = async () => {
 
   const input = createReadStream(`${currentDirname}/files/fileToCalculateHashFor.txt`);
 
-  await pipeline(input, hash.digest('hex'), stdout);
+  await pipeline(input, hash);
+
+  console.debug(hash.digest('hex'));
 };
 
 await calculateHash();
