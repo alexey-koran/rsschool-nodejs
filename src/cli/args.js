@@ -1,8 +1,8 @@
 import { argv } from 'node:process';
 
-const parseArgs = () => {
-  const cliArguments = argv.slice(2);
+const cliArguments = argv.slice(2);
 
+const parseArgs = () => {
   const resultStr = cliArguments
     .reduce((acc, curr, ind, arr) => {
       if (curr.startsWith('--')) {
