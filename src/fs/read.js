@@ -8,7 +8,7 @@ const read = async () => {
       encoding: 'utf8',
     });
 
-    console.debug(fileContent);
+    console.log(fileContent);
   } catch (error) {
     if (error?.code === 'ENOENT') {
       throw new Error('FS operation failed');

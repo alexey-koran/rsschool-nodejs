@@ -37,7 +37,7 @@ const performCalculations = async () => {
 
   const workersResults = await Promise.allSettled(workersPromises);
 
-  console.debug(
+  console.log(
     workersResults.map((promiseResult) => {
       if (promiseResult.status === 'rejected') {
         return {

@@ -5,7 +5,7 @@ const parseEnv = () => {
 
   const resultStr = rssEnv.map(([key, value]) => `${key}=${value}`).join('; ');
 
-  console.debug(resultStr);
+  console.log(resultStr);
 };
 
 parseEnv();

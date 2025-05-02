@@ -10,7 +10,7 @@ const calculateHash = async () => {
 
   await pipeline(input, hash);
 
-  console.debug(hash.digest('hex'));
+  console.log(hash.digest('hex'));
 };
 
 await calculateHash();

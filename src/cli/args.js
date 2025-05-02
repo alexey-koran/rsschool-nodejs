@@ -13,7 +13,7 @@ const parseArgs = () => {
     }, [])
     .join(', ');
 
-  console.debug(resultStr);
+  console.log(resultStr);
 };
 
 parseArgs();

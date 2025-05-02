@@ -12,12 +12,12 @@ const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.
   with: { type: 'json' },
 });
 
-console.debug(`Release ${release()}`);
-console.debug(`Version ${version()}`);
-console.debug(`Path segment separator is "${sep}"`);
+console.log(`Release ${release()}`);
+console.log(`Version ${version()}`);
+console.log(`Path segment separator is "${sep}"`);
 
-console.debug(`Path to current file is ${currentFileName}`);
-console.debug(`Path to current directory is ${currentDirname}`);
+console.log(`Path to current file is ${currentFileName}`);
+console.log(`Path to current directory is ${currentDirname}`);
 
 const myServer = createServerHttp((_, res) => {
   res.end('Request accepted');
@@ -25,11 +25,11 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.debug({ default: unknownObject.default });
+console.log({ default: unknownObject.default });
 
 myServer.listen(PORT, () => {
-  console.debug(`Server is listening on port ${PORT}`);
-  console.debug('To terminate it, use Ctrl+C combination');
+  console.log(`Server is listening on port ${PORT}`);
+  console.log('To terminate it, use Ctrl+C combination');
 });
 
 export { unknownObject, myServer };
