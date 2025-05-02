@@ -5,8 +5,6 @@ import { sep } from 'node:path';
 await import('./files/c.cjs');
 
 const random = Math.random();
-const currentDirname = import.meta.dirname;
-const currentFileName = import.meta.filename;
 
 const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', {
   with: { type: 'json' },
@@ -16,8 +14,8 @@ console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
 console.log(`Path segment separator is "${sep}"`);
 
-console.log(`Path to current file is ${currentFileName}`);
-console.log(`Path to current directory is ${currentDirname}`);
+console.log(`Path to current file is ${import.meta.filename}`);
+console.log(`Path to current directory is ${import.meta.dirname}`);
 
 const myServer = createServerHttp((_, res) => {
   res.end('Request accepted');
