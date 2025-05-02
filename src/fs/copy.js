@@ -8,11 +8,7 @@ const copy = async () => {
       recursive: true,
     });
   } catch (error) {
-    if (error?.code === 'ERR_FS_CP_EEXIST' || error?.code === 'ENOENT') {
-      throw new Error('FS operation failed');
-    }
-
-    throw new Error(error);
+    throw new Error('FS operation failed', { cause: error });
   }
 };
 
