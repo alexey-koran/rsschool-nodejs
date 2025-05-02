@@ -5,7 +5,7 @@ import { EOL } from 'node:os';
 
 const transform = async () => {
   const transformStream = new Transform({
-    transform(buffer, encoding, next) {
+    transform(buffer, _encoding, next) {
       const input = buffer.toString().trim();
       const reversed = input.split('').reverse().join('');
       transformStream.push(`${reversed}${EOL}`);
