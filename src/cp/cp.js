@@ -1,9 +1,12 @@
 import { fork } from 'node:child_process';
 import { stdin, stdout, exit } from 'node:process';
 import { pipeline } from 'node:stream/promises';
+import { join } from 'node:path';
 
 const spawnChildProcess = async (args) => {
-  const childProcess = fork(`${import.meta.dirname}/files/script.js`, args, { silent: true });
+  const childProcess = fork(join(import.meta.dirname, 'files', 'script.js'), args, {
+    silent: true,
+  });
 
   childProcess.on('exit', () => {
     exit();

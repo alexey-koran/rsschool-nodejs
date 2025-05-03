@@ -1,14 +1,19 @@
 import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
-import { sep } from 'node:path';
+import { join, sep } from 'node:path';
 
-await import('./files/c.cjs');
+await import(join(import.meta.dirname, 'files', 'c.cjs'));
 
 const random = Math.random();
 
-const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', {
-  with: { type: 'json' },
-});
+const unknownObject = await import(
+  random > 0.5
+    ? join(import.meta.dirname, 'files', 'a.json')
+    : join(import.meta.dirname, 'files', 'b.json'),
+  {
+    with: { type: 'json' },
+  },
+);
 
 console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);

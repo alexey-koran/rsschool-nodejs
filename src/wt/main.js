@@ -1,5 +1,6 @@
 import { availableParallelism } from 'node:os';
 import { Worker } from 'node:worker_threads';
+import { join } from 'node:path';
 
 const START_COUNT = 10;
 
@@ -11,7 +12,7 @@ const performCalculations = async () => {
 
   for (let i = 0; i < cpuCoresCount; i += 1) {
     const workerPromise = new Promise((resolve, reject) => {
-      const newWorker = new Worker(`${currentDirname}/worker.js`, {
+      const newWorker = new Worker(join(currentDirname, 'worker.js'), {
         workerData: { n: START_COUNT + i },
       });
 

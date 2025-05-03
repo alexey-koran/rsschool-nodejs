@@ -1,9 +1,10 @@
 import { rename as fsRename, access, constants } from 'node:fs/promises';
+import { join } from 'node:path';
 
 const rename = async () => {
   try {
     const hasProperFile = await access(
-      `${import.meta.dirname}/files/properFilename.md`,
+      join(import.meta.dirname, 'files', 'properFilename.md'),
       constants.R_OK | constants.W_OK,
     );
 
@@ -18,8 +19,8 @@ const rename = async () => {
 
   try {
     await fsRename(
-      `${import.meta.dirname}/files/wrongFilename.txt`,
-      `${import.meta.dirname}/files/properFilename.md`,
+      join(import.meta.dirname, 'files', 'wrongFilename.txt'),
+      join(import.meta.dirname, 'files', 'properFilename.md'),
     );
   } catch (error) {
     throw new Error('FS operation failed', { cause: error });
