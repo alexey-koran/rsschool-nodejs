@@ -8,8 +8,7 @@ const transform = async () => {
     transform(buffer, _encoding, next) {
       const input = buffer.toString().trim();
       const reversed = input.split('').reverse().join('');
-      transformStream.push(`${reversed}${EOL}`);
-      next();
+      next(null, `${reversed}${EOL}`);
     },
   });
 
