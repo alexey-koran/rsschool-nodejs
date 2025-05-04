@@ -18,12 +18,6 @@ export const messages = {
     args: 'CLI arguments:',
     env: 'CLI env:',
   },
-  hash: {
-    calculate: 'Hash calculated.',
-  },
-  wt: {
-    performCalculations: 'Calculations performed.',
-  },
   streams: {
     read: 'File read.',
     write: 'File written.',

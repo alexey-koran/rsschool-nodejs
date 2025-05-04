@@ -15,8 +15,6 @@ const calculateHash = async () => {
   await pipeline(input, hash);
 
   console.log(hash.digest('hex'));
-
-  console.log(messages.success, messages.hash.calculate);
 };
 
 await calculateHash();

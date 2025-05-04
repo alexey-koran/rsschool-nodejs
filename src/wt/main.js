@@ -51,8 +51,6 @@ const performCalculations = async () => {
       return promiseResult.value;
     }),
   );
-
-  console.log(messages.success, messages.wt.performCalculations);
 };
 
 await performCalculations();
