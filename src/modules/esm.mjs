@@ -7,9 +7,7 @@ await import(join(import.meta.dirname, 'files', 'c.cjs'));
 const random = Math.random();
 
 const unknownObject = await import(
-  random > 0.5
-    ? join(import.meta.dirname, 'files', 'a.json')
-    : join(import.meta.dirname, 'files', 'b.json'),
+  join(import.meta.dirname, 'files', random > 0.5 ? 'a.json' : 'b.json'),
   {
     with: { type: 'json' },
   },
