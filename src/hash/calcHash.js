@@ -1,7 +1,6 @@
 import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { join } from 'node:path';
-import { messages } from '../constants.mjs';
 
 const calculateHash = async () => {
   const { createHash } = await import('node:crypto');
