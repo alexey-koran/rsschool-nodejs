@@ -26,7 +26,7 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.log({ default: unknownObject.default });
+console.log(unknownObject.default);
 
 myServer.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
