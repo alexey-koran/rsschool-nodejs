@@ -10,7 +10,7 @@ const rename = async () => {
     );
 
     if (hasProperFile === undefined) {
-      throw new Error(messages.error, { cause: messages.fileNotFound });
+      throw new Error(messages.fileNotFound);
     }
   } catch (error) {
     if (error?.code !== 'ENOENT') {
