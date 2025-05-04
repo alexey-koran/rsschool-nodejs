@@ -2,6 +2,7 @@ import { stdin, stdout } from 'node:process';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { EOL } from 'node:os';
+import { messages } from '../constants.mjs';
 
 const transform = async () => {
   const transformStream = new Transform({
@@ -14,6 +15,8 @@ const transform = async () => {
   });
 
   await pipeline(stdin, transformStream, stdout);
+
+  console.log(messages.success, messages.streams.transform);
 };
 
 await transform();

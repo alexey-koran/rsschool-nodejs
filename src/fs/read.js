@@ -12,6 +12,7 @@ const read = async () => {
     );
 
     console.log(fileContent);
+    console.log(messages.success, messages.fs.read);
   } catch (error) {
     throw new Error(messages.error, { cause: error });
   }

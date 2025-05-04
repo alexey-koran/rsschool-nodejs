@@ -11,6 +11,8 @@ const create = async () => {
       fileContent,
       { flag: 'wx' },
     );
+
+    console.log(messages.success, messages.fs.create);
   } catch (error) {
     throw new Error(messages.error, { cause: error });
   }

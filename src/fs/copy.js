@@ -13,6 +13,8 @@ const copy = async () => {
         recursive: true,
       },
     );
+
+    console.log(messages.success, messages.fs.copy);
   } catch (error) {
     throw new Error(messages.error, { cause: error });
   }

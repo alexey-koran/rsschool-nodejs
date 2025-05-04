@@ -2,6 +2,7 @@ import { fork } from 'node:child_process';
 import { stdin, stdout, exit } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const spawnChildProcess = async (args) => {
   const childProcess = fork(
@@ -12,7 +13,13 @@ const spawnChildProcess = async (args) => {
     },
   );
 
+  childProcess.on('error', (error) => {
+    console.error(messages.cp.error, error);
+    exit();
+  });
+
   childProcess.on('exit', () => {
+    console.log(messages.cp.exit);
     exit();
   });
 

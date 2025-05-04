@@ -1,6 +1,7 @@
 import { availableParallelism } from 'node:os';
 import { Worker } from 'node:worker_threads';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const START_COUNT = 10;
 
@@ -50,6 +51,8 @@ const performCalculations = async () => {
       return promiseResult.value;
     }),
   );
+
+  console.log(messages.success, messages.wt.performCalculations);
 };
 
 await performCalculations();

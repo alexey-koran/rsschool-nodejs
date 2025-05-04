@@ -1,17 +1,36 @@
 export const messages = {
   fs: {
-    create: 'File created',
-    copy: 'Files copied',
-    read: 'File read',
-    list: 'Files listed',
-    remove: 'File removed',
-    rename: 'File renamed',
-    fileNotFound: 'File not found or improperly defined',
+    create: 'File created.',
+    copy: 'Files copied.',
+    read: 'File read.',
+    list: 'Files listed.',
+    remove: 'File removed.',
+    rename: 'File renamed.',
   },
   zip: {
-    compress: 'File compressed',
-    decompress: 'File decompressed',
+    compress: 'File compressed.',
+    decompress: 'File decompressed.',
   },
-  success: 'FS operation successful',
-  error: 'FS operation failed',
+  cp: {
+    exit: 'Child process exited.',
+    error: 'Child process failed.',
+  },
+  cli: {
+    args: 'CLI arguments:',
+    env: 'CLI env:',
+  },
+  hash: {
+    calculate: 'Hash calculated.',
+  },
+  wt: {
+    performCalculations: 'Calculations performed.',
+  },
+  streams: {
+    read: 'File read.',
+    write: 'File written.',
+    transform: 'File transformed.',
+  },
+  success: 'FS operation successful.',
+  error: 'FS operation failed.',
+  fileNotFound: 'File not found or improperly defined.',
 };

@@ -16,6 +16,8 @@ const decompress = async () => {
     );
 
     await pipeline(source, unGzip, destination);
+
+    console.log(messages.success, messages.zip.decompress);
   } catch (error) {
     throw new Error(messages.error, { cause: error });
   }
