@@ -8,6 +8,10 @@ export const messages = {
     rename: 'File renamed',
     fileNotFound: 'File not found or improperly defined',
   },
+  zip: {
+    compress: 'File compressed',
+    decompress: 'File decompressed',
+  },
   success: 'FS operation successful',
   error: 'FS operation failed',
 };
