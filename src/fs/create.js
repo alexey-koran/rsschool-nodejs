@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const fileContent = 'I am fresh and young';
 
@@ -11,7 +12,7 @@ const create = async () => {
       { flag: 'wx' },
     );
   } catch (error) {
-    throw new Error('FS operation failed', { cause: error });
+    throw new Error(messages.error, { cause: error });
   }
 };
 

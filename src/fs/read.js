@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const read = async () => {
   try {
@@ -12,7 +13,7 @@ const read = async () => {
 
     console.log(fileContent);
   } catch (error) {
-    throw new Error('FS operation failed', { cause: error });
+    throw new Error(messages.error, { cause: error });
   }
 };
 

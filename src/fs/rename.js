@@ -1,5 +1,6 @@
 import { rename as fsRename, access, constants } from 'node:fs/promises';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const rename = async () => {
   try {
@@ -9,11 +10,11 @@ const rename = async () => {
     );
 
     if (hasProperFile === undefined) {
-      throw new Error('FS operation failed', { cause: 'File not found or improperly defined' });
+      throw new Error(messages.error, { cause: messages.fileNotFound });
     }
   } catch (error) {
     if (error?.code !== 'ENOENT') {
-      throw new Error('FS operation failed', { cause: error });
+      throw new Error(messages.error, { cause: error });
     }
   }
 
@@ -23,7 +24,7 @@ const rename = async () => {
       join(import.meta.dirname, 'files', 'properFilename.md'),
     );
   } catch (error) {
-    throw new Error('FS operation failed', { cause: error });
+    throw new Error(messages.error, { cause: error });
   }
 };
 

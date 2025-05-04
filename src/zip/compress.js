@@ -2,6 +2,7 @@ import { createReadStream, createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { createGzip } from 'node:zlib';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const compress = async () => {
   try {
@@ -16,7 +17,7 @@ const compress = async () => {
 
     await pipeline(source, gzip, destination);
   } catch (error) {
-    throw new Error('FS operation failed', { cause: error });
+    throw new Error(messages.error, { cause: error });
   }
 };
 

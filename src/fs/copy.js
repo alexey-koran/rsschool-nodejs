@@ -1,5 +1,6 @@
 import { cp } from 'node:fs/promises';
 import { join } from 'node:path';
+import { messages } from '../constants.mjs';
 
 const copy = async () => {
   try {
@@ -13,7 +14,7 @@ const copy = async () => {
       },
     );
   } catch (error) {
-    throw new Error('FS operation failed', { cause: error });
+    throw new Error(messages.error, { cause: error });
   }
 };
 
