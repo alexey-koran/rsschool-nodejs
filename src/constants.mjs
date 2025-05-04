@@ -18,11 +18,6 @@ export const messages = {
     args: 'CLI arguments:',
     env: 'CLI env:',
   },
-  streams: {
-    read: 'File read.',
-    write: 'File written.',
-    transform: 'File transformed.',
-  },
   success: 'FS operation successful.',
   error: 'FS operation failed.',
 };
