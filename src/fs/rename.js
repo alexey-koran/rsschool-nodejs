@@ -23,6 +23,8 @@ const rename = async () => {
       join(import.meta.dirname, 'files', 'wrongFilename.txt'),
       join(import.meta.dirname, 'files', 'properFilename.md'),
     );
+
+    console.log(messages.success, messages.fs.rename);
   } catch (error) {
     throw new Error(messages.error, { cause: error });
   }
