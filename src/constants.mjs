@@ -6,6 +6,7 @@ export const messages = {
     list: 'Files listed.',
     remove: 'File removed.',
     rename: 'File renamed.',
+    properFileExists: 'Proper file exists.',
   },
   zip: {
     compress: 'File compressed.',
@@ -32,5 +33,4 @@ export const messages = {
   },
   success: 'FS operation successful.',
   error: 'FS operation failed.',
-  fileNotFound: 'File not found or improperly defined.',
 };
