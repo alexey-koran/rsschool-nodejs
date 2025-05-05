@@ -1,3 +1,5 @@
+import { EOL } from 'node:os';
+
 import { DEFAULT_USERNAME } from '../constants/index.mjs';
 import { programErrors } from '../messages.mjs';
 
@@ -15,7 +17,7 @@ export const getUsernameFromArgv = (argv) => {
     }
   }
 
-  console.error(programErrors.usernameNotFound);
+  console.error(`${programErrors.usernameNotFound}${EOL}`);
 
   return DEFAULT_USERNAME;
 };

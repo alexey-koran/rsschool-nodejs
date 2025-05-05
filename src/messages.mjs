@@ -1,7 +1,7 @@
 import { EOL } from 'node:os';
 
 export const programErrors = {
-  usernameNotFound: `Username argument not found.${EOL}Default username used.${EOL}`,
+  usernameNotFound: `Username argument not found.${EOL}Default username used.`,
   tryAgain: 'Please try again!',
   invalidInput: 'Invalid input',
   operationFailed: 'Operation failed',
@@ -17,8 +17,8 @@ const defaultMessages = {
 };
 
 export const getProgramMessages = (username) => {
-  const welcome = `Welcome to the File Manager, ${username}!${EOL}`;
-  const goodbye = `Thank you for using File Manager, ${username}, goodbye!${EOL}`;
+  const welcome = `Welcome to the File Manager, ${username}!`;
+  const goodbye = `Thank you for using File Manager, ${username}, goodbye!`;
 
   return {
     ...defaultMessages,
