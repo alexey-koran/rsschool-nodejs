@@ -11,11 +11,14 @@ const compress = async () => {
     const source = createReadStream(
       join(import.meta.dirname, 'files', 'fileToCompress.txt'),
     );
+
+    await pipeline(source, gzip);
+
     const destination = createWriteStream(
       join(import.meta.dirname, 'files', 'archive.gz'),
     );
 
-    await pipeline(source, gzip, destination);
+    await pipeline(gzip, destination);
 
     console.log(messages.success, messages.zip.compress);
   } catch (error) {
