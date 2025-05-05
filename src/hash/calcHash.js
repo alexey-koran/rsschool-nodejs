@@ -1,10 +1,9 @@
 import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const calculateHash = async () => {
-  const { createHash } = await import('node:crypto');
-
   const hash = createHash('sha256');
 
   const input = createReadStream(
