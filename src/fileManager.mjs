@@ -94,7 +94,7 @@ const startFileManager = async () => {
             changeCurrentWorkingDirectory,
           });
 
-          console.debug(`${command} ${programMessages.operationSuccessful}${EOL}`);
+          console.debug(`${command} ${programMessages.operationSuccessful}`);
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
@@ -105,7 +105,7 @@ const startFileManager = async () => {
       }
     } else {
       console.error(
-        `${programErrors.invalidInput} ${programErrors.commandNotFound} ${programErrors.tryAgain}`,
+        `${EOL}${programErrors.invalidInput} ${programErrors.commandNotFound}${EOL}${programErrors.tryAgain}${EOL}`,
       );
     }
   });
