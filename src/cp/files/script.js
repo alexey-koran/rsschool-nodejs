@@ -1,5 +1,4 @@
 import { EOL } from 'node:os';
-
 import { argv, stdout, stdin, exit } from 'node:process';
 
 const args = argv.slice(2);
@@ -14,7 +13,7 @@ const echoInput = (chunk) => {
     exit(0);
   }
 
-  stdout.write(`Received from master process: ${chunk.toString()}${EOL}`)
+  stdout.write(`Received from master process: ${chunk.toString()}${EOL}`);
 };
 
 stdin.on('data', echoInput);

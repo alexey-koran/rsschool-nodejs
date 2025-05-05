@@ -1,4 +1,5 @@
 import { env } from 'node:process';
+
 import { messages } from '../constants.mjs';
 
 const parseEnv = () => {

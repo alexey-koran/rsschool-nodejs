@@ -1,4 +1,5 @@
 import { argv } from 'node:process';
+
 import { messages } from '../constants.mjs';
 
 const cliArguments = argv.slice(2);

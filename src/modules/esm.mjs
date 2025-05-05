@@ -10,7 +10,7 @@ const unknownObject = await import(
   join(import.meta.dirname, 'files', random > 0.5 ? 'a.json' : 'b.json'),
   {
     with: { type: 'json' },
-  },
+  }
 );
 
 console.log(`Release ${release()}`);

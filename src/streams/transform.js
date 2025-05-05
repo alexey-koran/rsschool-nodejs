@@ -1,7 +1,7 @@
+import { EOL } from 'node:os';
 import { stdin, stdout } from 'node:process';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { EOL } from 'node:os';
 
 const transform = async () => {
   const transformStream = new Transform({

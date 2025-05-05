@@ -1,6 +1,6 @@
 import { availableParallelism } from 'node:os';
-import { Worker } from 'node:worker_threads';
 import { join } from 'node:path';
+import { Worker } from 'node:worker_threads';
 
 const START_COUNT = 10;
 
