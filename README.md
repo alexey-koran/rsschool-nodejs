@@ -6,7 +6,7 @@ This monorepo contains solutions for `RS School Node.js` [assignments](https://g
 
 | Task             | Path                             | Branch                                   | Link                                                                                                               |
 | ---------------- | -------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `Node.js Basics` | [nodejs-basics](./nodejs-basics) | [nodejs-basics](../..nodejs-basics-fork) | [Assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/nodejs-basics/assignment.md) |
+| `Node.js Basics` | [nodejs-basics](./nodejs-basics) | [nodejs-basics](../../tree/nodejs-basics-fork) | [Assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/nodejs-basics/assignment.md) |
 
 ## License
 
