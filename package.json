@@ -1,0 +1,45 @@
+{
+  "name": "node-file-manager",
+  "version": "0.0.1",
+  "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
+  "engines": {
+    "node": ">=23.11.0"
+  },
+  "type": "module",
+  "main": "src/fileManager.mjs",
+  "scripts": {
+    "start": "node src/fileManager.mjs",
+    "lint": "eslint **/*.{js,cjs,mjs,ts,cts,mts}",
+    "lint:fix": "eslint **/*.{js,cjs,mjs,ts,cts,mts} --fix",
+    "prettier": "prettier --check \"**/*.{js,cjs,mjs,ts,cts,mts}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,cjs,mjs,ts,cts,mts}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexey-koran/node-file-manager.git"
+  },
+  "keywords": [
+    "nodejs",
+    "assignments"
+  ],
+  "author": "Alexey-Koran <alexey.koran@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexey-koran/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/alexey-koran/node-file-manager#readme",
+  "devDependencies": {
+    "@alexey-koran/eslint-config": "^0.3.0",
+    "@alexey-koran/prettier-config": "^0.1.1",
+    "@alexey-koran/tsconfig": "^0.1.0",
+    "@eslint/js": "^9.26.0",
+    "@types/node": "^22.15.3",
+    "eslint": "^9.26.0",
+    "prettier": "^3.5.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ]
+  }
+}
