@@ -1,4 +1,4 @@
-import { homedir } from 'node:os';
+import { homedir, EOL } from 'node:os';
 import { argv, stdin, stdout, exit } from 'node:process';
 import { createInterface } from 'node:readline/promises';
 
@@ -94,11 +94,11 @@ const startFileManager = async () => {
             changeCurrentWorkingDirectory,
           });
 
-          console.debug(`${command} ${programMessages.operationSuccessful}\n`);
+          console.debug(`${command} ${programMessages.operationSuccessful}${EOL}`);
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
-          console.error(`${programErrors.operationFailed}. \n${error?.message}`);
+          console.error(`${programErrors.operationFailed}. ${EOL}${error?.message}`);
         }
       } catch (error) {
         console.error(error?.message);

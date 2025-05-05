@@ -1,3 +1,5 @@
+import { EOL } from 'node:os';
+
 import { programErrors } from '../messages.mjs';
 
 export const validateOptionsAndParameters = async ({
@@ -10,13 +12,15 @@ export const validateOptionsAndParameters = async ({
   const { mandatory, optional } = parameters;
 
   if (!options && passedOptions?.length) {
-    throw new Error(`${programErrors.invalidInput}\n${command} ${programErrors.notSupportOptions}`);
+    throw new Error(
+      `${programErrors.invalidInput}${EOL}${command} ${programErrors.notSupportOptions}`,
+    );
   }
 
   const totalCount = mandatory?.length + optional?.length;
 
   if (passedParameters?.length > totalCount) {
-    throw new Error(`${programErrors.invalidInput}\n${programErrors.tooMuchArguments}`);
+    throw new Error(`${programErrors.invalidInput}${EOL}${programErrors.tooMuchArguments}`);
   }
 
   if (mandatory?.length && !passedParameters?.length) {
@@ -26,7 +30,7 @@ export const validateOptionsAndParameters = async ({
       .trim();
 
     throw new Error(
-      `${programErrors.invalidInput}\n${mandatoryFields} ${programErrors.notSpecified}`,
+      `${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}`,
     );
   } else if (mandatory?.length && passedParameters?.length < mandatory?.length) {
     const notSpecifiedMandatoryFields = mandatory.slice(passedParameters?.length);
@@ -37,7 +41,7 @@ export const validateOptionsAndParameters = async ({
       .trim();
 
     throw new Error(
-      `${programErrors.invalidInput}\n${mandatoryFields} ${programErrors.notSpecified}`,
+      `${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}`,
     );
   }
 };
