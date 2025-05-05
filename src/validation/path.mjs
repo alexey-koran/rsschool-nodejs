@@ -1,5 +1,7 @@
 import { access, constants } from 'node:fs/promises';
-import { homedir } from 'node:os';
+import { EOL } from 'node:os';
+import { parse } from 'node:path';
+import { cwd } from 'node:process';
 
 import { programErrors } from '../messages.mjs';
 
@@ -7,15 +9,15 @@ const checkPath = async (path) => {
   try {
     await access(path, constants.F_OK);
   } catch (error) {
-    throw new Error(`${programErrors.invalidInput} ${error?.message}`);
+    throw new Error(`${programErrors.invalidInput}${EOL}${error?.message}`);
   }
 };
 
 export const validatePath = async (path, options = { checkPath: false }) => {
-  const homeDir = homedir();
+  const rootDir = parse(cwd()).root;
 
-  if (!path.startsWith(homeDir)) {
-    throw new Error(programErrors.outOfRootDirectory);
+  if (!path.startsWith(rootDir)) {
+    throw new Error(`${programErrors.invalidInput}${EOL}${programErrors.outOfRootDirectory}`);
   }
 
   if (options.checkPath) {
