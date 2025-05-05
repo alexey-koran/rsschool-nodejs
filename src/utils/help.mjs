@@ -1,10 +1,11 @@
 export const getHelpMap = (commandsMap) =>
-  Object.entries(commandsMap).reduce((acc, [key, value]) => {
-    return {
+  Object.entries(commandsMap).reduce(
+    (acc, [key, value]) => ({
       ...acc,
       [`${key}`]: value?.help,
-    };
-  }, {});
+    }),
+    {},
+  );
 
 export const parseHelpObj = (helpObj) => {
   const keys = Object.keys(helpObj);
