@@ -1,34 +1,33 @@
 import { rename as fsRename, access, constants } from 'node:fs/promises';
+import { join } from 'node:path';
+
+import { messages } from '../constants.mjs';
 
 const rename = async () => {
-  const currentDirname = import.meta.dirname;
-
   try {
     const hasProperFile = await access(
-      `${currentDirname}/files/properFilename.md`,
+      join(import.meta.dirname, 'files', 'properFilename.md'),
       constants.R_OK | constants.W_OK,
     );
 
     if (hasProperFile === undefined) {
-      throw new Error('FS operation failed');
+      throw new Error(messages.fs.properFileExists);
     }
   } catch (error) {
     if (error?.code !== 'ENOENT') {
-      throw new Error(error);
+      throw new Error(messages.error, { cause: error });
     }
   }
 
   try {
     await fsRename(
-      `${currentDirname}/files/wrongFilename.txt`,
-      `${currentDirname}/files/properFilename.md`,
+      join(import.meta.dirname, 'files', 'wrongFilename.txt'),
+      join(import.meta.dirname, 'files', 'properFilename.md'),
     );
-  } catch (error) {
-    if (error?.code === 'ENOENT') {
-      throw new Error('FS operation failed');
-    }
 
-    throw new Error(error);
+    console.log(messages.success, messages.fs.rename);
+  } catch (error) {
+    throw new Error(messages.error, { cause: error });
   }
 };
 

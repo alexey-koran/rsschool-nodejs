@@ -1,14 +1,17 @@
 import { writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+import { messages } from '../constants.mjs';
 
 const fileContent = 'I am fresh and young';
 
 const create = async () => {
   try {
-    const currentDirname = import.meta.dirname;
+    await writeFile(join(import.meta.dirname, 'files', 'fresh.txt'), fileContent, { flag: 'wx' });
 
-    await writeFile(`${currentDirname}/files/fresh.txt`, fileContent, { flag: 'wx' });
-  } catch (_error) {
-    throw new Error('FS operation failed');
+    console.log(messages.success, messages.fs.create);
+  } catch (error) {
+    throw new Error(messages.error, { cause: error });
   }
 };
 

@@ -1,8 +1,10 @@
 import { argv } from 'node:process';
 
-const parseArgs = () => {
-  const cliArguments = argv.slice(2);
+import { messages } from '../constants.mjs';
 
+const cliArguments = argv.slice(2);
+
+const parseArgs = () => {
   const resultStr = cliArguments
     .reduce((acc, curr, ind, arr) => {
       if (curr.startsWith('--')) {
@@ -13,7 +15,7 @@ const parseArgs = () => {
     }, [])
     .join(', ');
 
-  console.debug(resultStr);
+  console.log(messages.cli.args, resultStr);
 };
 
 parseArgs();

@@ -1,4 +1,5 @@
 import { availableParallelism } from 'node:os';
+import { join } from 'node:path';
 import { Worker } from 'node:worker_threads';
 
 const START_COUNT = 10;
@@ -7,11 +8,9 @@ const performCalculations = async () => {
   const cpuCoresCount = availableParallelism();
   const workersPromises = [];
 
-  const currentDirname = import.meta.dirname;
-
   for (let i = 0; i < cpuCoresCount; i += 1) {
     const workerPromise = new Promise((resolve, reject) => {
-      const newWorker = new Worker(`${currentDirname}/worker.js`, {
+      const newWorker = new Worker(join(import.meta.dirname, 'worker.js'), {
         workerData: { n: START_COUNT + i },
       });
 
@@ -37,7 +36,7 @@ const performCalculations = async () => {
 
   const workersResults = await Promise.allSettled(workersPromises);
 
-  console.debug(
+  console.log(
     workersResults.map((promiseResult) => {
       if (promiseResult.status === 'rejected') {
         return {

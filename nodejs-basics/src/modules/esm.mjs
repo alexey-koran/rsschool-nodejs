@@ -1,23 +1,24 @@
 import { createServer as createServerHttp } from 'node:http';
 import { release, version } from 'node:os';
-import { sep } from 'node:path';
+import { join, sep } from 'node:path';
 
-const cFile = await import('./files/c.cjs');
+await import(join(import.meta.dirname, 'files', 'c.cjs'));
 
 const random = Math.random();
-const currentDirname = import.meta.dirname;
-const currentFileName = import.meta.filename;
 
-const unknownObject = await import(random > 0.5 ? './files/a.json' : './files/b.json', {
-  with: { type: 'json' },
-});
+const unknownObject = await import(
+  join(import.meta.dirname, 'files', random > 0.5 ? 'a.json' : 'b.json'),
+  {
+    with: { type: 'json' },
+  }
+);
 
-console.debug(`Release ${release()}`);
-console.debug(`Version ${version()}`);
-console.debug(`Path segment separator is "${sep}"`);
+console.log(`Release ${release()}`);
+console.log(`Version ${version()}`);
+console.log(`Path segment separator is "${sep}"`);
 
-console.debug(`Path to current file is ${currentFileName}`);
-console.debug(`Path to current directory is ${currentDirname}`);
+console.log(`Path to current file is ${import.meta.filename}`);
+console.log(`Path to current directory is ${import.meta.dirname}`);
 
 const myServer = createServerHttp((_, res) => {
   res.end('Request accepted');
@@ -25,11 +26,11 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-console.debug({ default: unknownObject.default });
+console.log(unknownObject.default);
 
 myServer.listen(PORT, () => {
-  console.debug(`Server is listening on port ${PORT}`);
-  console.debug('To terminate it, use Ctrl+C combination');
+  console.log(`Server is listening on port ${PORT}`);
+  console.log('To terminate it, use Ctrl+C combination');
 });
 
 export { unknownObject, myServer };

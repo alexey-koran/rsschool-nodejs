@@ -1,17 +1,15 @@
 import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+
+import { messages } from '../constants.mjs';
 
 const list = async () => {
   try {
-    const currentDirname = import.meta.dirname;
+    const list = await readdir(join(import.meta.dirname, 'files'));
 
-    const list = await readdir(`${currentDirname}/files`);
-    console.debug(list);
+    console.log(list);
   } catch (error) {
-    if (error?.code === 'ENOENT') {
-      throw new Error('FS operation failed');
-    }
-
-    throw new Error(error);
+    throw new Error(messages.error, { cause: error });
   }
 };
 

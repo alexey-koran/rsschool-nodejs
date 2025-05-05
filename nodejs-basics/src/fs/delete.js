@@ -1,16 +1,15 @@
 import { rm } from 'node:fs/promises';
+import { join } from 'node:path';
+
+import { messages } from '../constants.mjs';
 
 const remove = async () => {
   try {
-    const currentDirname = import.meta.dirname;
+    await rm(join(import.meta.dirname, 'files', 'fileToRemove.txt'));
 
-    await rm(`${currentDirname}/files/fileToRemove.txt`);
+    console.log(messages.success, messages.fs.remove);
   } catch (error) {
-    if (error?.code === 'ENOENT') {
-      throw new Error('FS operation failed');
-    }
-
-    throw new Error(error);
+    throw new Error(messages.error, { cause: error });
   }
 };
 
