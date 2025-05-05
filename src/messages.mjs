@@ -17,8 +17,8 @@ const defaultMessages = {
 };
 
 export const getProgramMessages = (username) => {
-  const welcome = `Welcome to the File Manager, ${username}!\n`;
-  const goodbye = `Thank you for using File Manager, ${username}, goodbye!\n`;
+  const welcome = `Welcome to the File Manager, ${username}!${EOL}`;
+  const goodbye = `Thank you for using File Manager, ${username}, goodbye!${EOL}`;
 
   return {
     ...defaultMessages,
@@ -32,5 +32,5 @@ export const printWelcomeUser = (programMessages) => {
 };
 
 export const printWorkingDirectory = (workingDirectory) => {
-  console.debug(`\nYou are currently in ${workingDirectory}\n`);
+  console.debug(`${EOL}You are currently in ${workingDirectory}${EOL}`);
 };
