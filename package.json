@@ -30,5 +30,10 @@
     "@alexey-koran/tsconfig": "^0.1.0",
     "@types/node": "^22.15.3",
     "prettier": "^3.5.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ]
   }
 }
