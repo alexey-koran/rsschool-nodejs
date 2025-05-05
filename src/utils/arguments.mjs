@@ -1,5 +1,4 @@
-import { exit } from 'node:process';
-
+import { DEFAULT_USERNAME } from '../constants/index.mjs';
 import { programErrors } from '../messages.mjs';
 
 const getUsernameArgument = (argv) =>
@@ -16,7 +15,7 @@ export const getUsernameFromArgv = (argv) => {
     }
   }
 
-  console.error(`${programErrors.usernameNotFound} ${programErrors.tryAgain}`);
+  console.error(programErrors.usernameNotFound);
 
-  exit(0);
+  return DEFAULT_USERNAME;
 };

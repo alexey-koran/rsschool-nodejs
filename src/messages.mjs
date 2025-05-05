@@ -1,5 +1,7 @@
+import { EOL } from 'node:os';
+
 export const programErrors = {
-  usernameNotFound: "Username argument wasn't found!",
+  usernameNotFound: `Username argument not found.${EOL}Default username used.${EOL}`,
   tryAgain: 'Please try again!',
   invalidInput: 'Invalid input',
   operationFailed: 'Operation failed',
