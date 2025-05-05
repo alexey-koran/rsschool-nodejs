@@ -8,11 +8,9 @@ const performCalculations = async () => {
   const cpuCoresCount = availableParallelism();
   const workersPromises = [];
 
-  const currentDirname = import.meta.dirname;
-
   for (let i = 0; i < cpuCoresCount; i += 1) {
     const workerPromise = new Promise((resolve, reject) => {
-      const newWorker = new Worker(join(currentDirname, 'worker.js'), {
+      const newWorker = new Worker(join(import.meta.dirname, 'worker.js'), {
         workerData: { n: START_COUNT + i },
       });
 
