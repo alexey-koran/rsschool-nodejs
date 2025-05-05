@@ -1,7 +1,6 @@
 import { availableParallelism } from 'node:os';
 import { Worker } from 'node:worker_threads';
 import { join } from 'node:path';
-import { messages } from '../constants.mjs';
 
 const START_COUNT = 10;
 
