@@ -1,6 +1,7 @@
 import add from './add.mjs';
 import cat from './cat.mjs';
 import cd from './cd.mjs';
+import cdFiles from './cdFiles.mjs';
 import compress from './compress.mjs';
 import cp from './cp.mjs';
 import decompress from './decompress.mjs';
@@ -18,6 +19,7 @@ export const commandsMap = {
   add,
   cat,
   cd,
+  cdFiles,
   compress,
   cp,
   decompress,
