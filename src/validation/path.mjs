@@ -1,6 +1,6 @@
 import { access, constants } from 'node:fs/promises';
-import { EOL, isAbsolute, join, resolve } from 'node:os';
-import { parse } from 'node:path';
+import { EOL } from 'node:os';
+import { isAbsolute, parse, join, resolve } from 'node:path';
 import { cwd } from 'node:process';
 
 import { programErrors } from '../messages.mjs';
