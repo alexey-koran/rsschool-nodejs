@@ -1,9 +1,9 @@
 import { cp, rm } from 'node:fs/promises';
-import { join } from 'node:path';
 
 import { pathToFile, pathToNewDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../validation/index.mjs';
+import { getPath } from '../validation/path.mjs';
 
 const parameters = {
   mandatory: [pathToFile, pathToNewDirectory],
@@ -20,8 +20,8 @@ const mv = async ({
   passedParameters: [_pathToFile, _pathToNewDirectory],
   currentWorkingDirectory,
 }) => {
-  const sourcePath = join(currentWorkingDirectory, _pathToFile);
-  const destinationPath = join(currentWorkingDirectory, _pathToNewDirectory);
+  const sourcePath = getPath({ path: _pathToFile, currentWorkingDirectory });
+  const destinationPath = getPath({ path: _pathToNewDirectory, currentWorkingDirectory });
 
   await validatePath(sourcePath);
   await validatePath(destinationPath);

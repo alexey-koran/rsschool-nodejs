@@ -1,8 +1,7 @@
-import { join, isAbsolute } from 'node:path';
-
 import { pathToDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../validation/index.mjs';
+import { getPath } from '../validation/path.mjs';
 
 const parameters = {
   mandatory: [pathToDirectory],
@@ -21,13 +20,7 @@ const cd = async ({
   currentWorkingDirectory,
   changeCurrentWorkingDirectory,
 }) => {
-  let newPath;
-
-  if (isAbsolute(_pathToDirectory)) {
-    newPath = _pathToDirectory;
-  } else {
-    newPath = join(currentWorkingDirectory, _pathToDirectory);
-  }
+  const newPath = getPath({ path: _pathToDirectory, currentWorkingDirectory });
 
   await validatePath(newPath, { checkPath: true });
 

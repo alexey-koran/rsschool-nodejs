@@ -1,5 +1,5 @@
 import { access, constants } from 'node:fs/promises';
-import { EOL } from 'node:os';
+import { EOL, isAbsolute, join, resolve } from 'node:os';
 import { parse } from 'node:path';
 import { cwd } from 'node:process';
 
@@ -23,4 +23,12 @@ export const validatePath = async (path, options = { checkPath: false }) => {
   if (options.checkPath) {
     await checkPath(path);
   }
+};
+
+export const getPath = ({ path, currentWorkingDirectory }) => {
+  if (isAbsolute(path)) {
+    return resolve(path);
+  }
+
+  return join(currentWorkingDirectory, path);
 };

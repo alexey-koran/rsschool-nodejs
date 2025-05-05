@@ -1,4 +1,5 @@
 import { writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 import { newFileName } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
@@ -15,7 +16,7 @@ const help = {
 };
 
 const add = async ({ passedParameters: [_fileName], currentWorkingDirectory }) => {
-  await writeFile(`${currentWorkingDirectory}/${_fileName}`, '', { flag: 'wx' });
+  await writeFile(join(currentWorkingDirectory, _fileName), '', { flag: 'wx' });
 };
 
 export default {

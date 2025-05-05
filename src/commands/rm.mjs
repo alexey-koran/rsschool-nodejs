@@ -1,9 +1,9 @@
 import { rm as fsRm } from 'node:fs/promises';
-import { join } from 'node:path';
 
 import { pathToFile } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../validation/index.mjs';
+import { getPath } from '../validation/path.mjs';
 
 const parameters = {
   mandatory: [pathToFile],
@@ -17,7 +17,7 @@ const help = {
 };
 
 const rm = async ({ passedParameters: [_pathToFile], currentWorkingDirectory }) => {
-  const newPath = join(currentWorkingDirectory, _pathToFile);
+  const newPath = getPath({ path: _pathToFile, currentWorkingDirectory });
 
   await validatePath(newPath);
 

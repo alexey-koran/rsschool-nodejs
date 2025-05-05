@@ -1,9 +1,9 @@
 import { rename as fsRename } from 'node:fs/promises';
-import { join } from 'node:path';
 
 import { pathToFile, newFileName } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
 import { validatePath } from '../validation/index.mjs';
+import { getPath } from '../validation/path.mjs';
 
 const parameters = {
   mandatory: [pathToFile, newFileName],
@@ -18,8 +18,8 @@ const help = {
 };
 
 const rn = async ({ passedParameters: [_pathToFile, _fileName], currentWorkingDirectory }) => {
-  const pathToFile = join(currentWorkingDirectory, _pathToFile);
-  const newFilePath = join(currentWorkingDirectory, _fileName);
+  const pathToFile = getPath({ path: _pathToFile, currentWorkingDirectory });
+  const newFilePath = getPath({ path: _fileName, currentWorkingDirectory });
 
   await validatePath(pathToFile);
   await validatePath(newFilePath);
