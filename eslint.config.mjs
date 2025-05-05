@@ -10,6 +10,9 @@ const config = [
   javaScriptConfig,
   {
     files: [supportedFileTypes.js],
+    rules: {
+      'no-console': 'off',
+    },
     settings: {
       'import/extensions': supportedExtensions.js,
       'import/parsers': {
