@@ -3,17 +3,17 @@ import { EOL } from 'node:os';
 export const programErrors = {
   usernameNotFound: `Username argument not found.${EOL}Default username used.`,
   tryAgain: 'Please try again!',
-  invalidInput: 'Invalid input',
-  operationFailed: 'Operation failed',
-  outOfRootDirectory: "You can't go upper than root directory",
-  notSupportOptions: 'command does not support options',
-  notSpecified: 'not specified',
-  tooMuchArguments: 'Too much arguments',
-  commandNotFound: 'Command not found',
+  invalidInput: 'Invalid input.',
+  operationFailed: 'Operation failed.',
+  outOfRootDirectory: "You can't go upper than root directory.",
+  notSupportOptions: 'command does not support options.',
+  notSpecified: 'not specified.',
+  tooMuchArguments: 'Too much arguments.',
+  commandNotFound: 'Command not found.',
 };
 
 const defaultMessages = {
-  operationSuccessful: 'operation successful',
+  operationSuccessful: 'operation successful.',
 };
 
 export const getProgramMessages = (username) => {
