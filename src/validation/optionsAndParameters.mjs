@@ -30,7 +30,7 @@ export const validateOptionsAndParameters = async ({
       .trim();
 
     throw new Error(
-      `${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}`,
+      `${EOL}${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}${EOL}`,
     );
   } else if (mandatory?.length && passedParameters?.length < mandatory?.length) {
     const notSpecifiedMandatoryFields = mandatory.slice(passedParameters?.length);
@@ -41,7 +41,7 @@ export const validateOptionsAndParameters = async ({
       .trim();
 
     throw new Error(
-      `${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}`,
+      `${EOL}${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}${EOL}`,
     );
   }
 };
