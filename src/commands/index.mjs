@@ -13,6 +13,7 @@ import mkdir from './mkdir.mjs';
 import mv from './mv.mjs';
 import os from './os.mjs';
 import rm from './rm.mjs';
+import rmdir from './rmdir.mjs';
 import rn from './rn.mjs';
 import up from './up.mjs';
 
@@ -32,6 +33,7 @@ export const commandsMap = {
   mv,
   os,
   rm,
+  rmdir,
   rn,
   up,
 };

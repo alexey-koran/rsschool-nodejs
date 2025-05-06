@@ -11,6 +11,7 @@ export const programErrors = {
   notSpecified: 'not specified.',
   tooMuchArguments: 'Too much arguments.',
   commandNotFound: 'Command not found.',
+  notADirectory: 'Path is not a directory.',
 };
 
 export const defaultMessages = {
