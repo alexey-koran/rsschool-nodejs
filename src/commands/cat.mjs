@@ -1,4 +1,5 @@
 import { createReadStream } from 'node:fs';
+import { EOL } from 'node:os';
 import { stdout } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 
@@ -25,7 +26,9 @@ const cat = async ({ passedParameters: [_pathToFile], currentWorkingDirectory })
 
   const sourceStream = createReadStream(filePath);
 
+  stdout.write(EOL);
   await pipeline(sourceStream, stdout, { end: false });
+  stdout.write(EOL);
 };
 
 export default {
