@@ -10,7 +10,7 @@ export const parseCommand = (line) => {
 
     const optionsAndParameters = trimmedLine.slice(trimmedLine.indexOf(' ') + 1);
 
-    const options = optionsAndParameters.match(/--\w*\s?/g);
+    const options = optionsAndParameters.match(/--\w+/g);
 
     if (options?.length > 0) {
       const onlyParameters = options?.reduce(
