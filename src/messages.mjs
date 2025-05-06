@@ -13,8 +13,9 @@ export const programErrors = {
   commandNotFound: 'Command not found.',
 };
 
-const defaultMessages = {
+export const defaultMessages = {
   operationSuccessful: 'operation successful.',
+  supportedOptions: 'Supported options',
 };
 
 export const getProgramMessages = (username) => {
@@ -22,7 +23,6 @@ export const getProgramMessages = (username) => {
   const goodbye = `Thank you for using File Manager, ${username}, goodbye!`;
 
   return {
-    ...defaultMessages,
     welcome,
     goodbye,
   };
