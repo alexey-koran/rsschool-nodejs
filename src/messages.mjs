@@ -7,6 +7,7 @@ export const programErrors = {
   operationFailed: 'Operation failed.',
   outOfRootDirectory: "You can't go upper than root directory.",
   notSupportOptions: 'command does not support options.',
+  unknownOptions: 'Unknown options provided to command',
   notSpecified: 'not specified.',
   tooMuchArguments: 'Too much arguments.',
   commandNotFound: 'Command not found.',
