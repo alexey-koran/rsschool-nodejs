@@ -94,11 +94,11 @@ const startFileManager = async () => {
             changeCurrentWorkingDirectory,
           });
 
-          console.debug(`${command} ${programMessages.operationSuccessful}`);
+          console.debug(`${EOL}${command} ${programMessages.operationSuccessful}`);
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
-          console.error(`${programErrors.operationFailed}. ${EOL}${error?.message}`);
+          console.error(`${programErrors.operationFailed}${EOL}${error?.message}${EOL}`);
         }
       } catch (error) {
         console.error(error?.message);
@@ -111,7 +111,7 @@ const startFileManager = async () => {
   });
 
   readLine.on('SIGINT', () => {
-    console.debug(`${programMessages.goodbye}`);
+    console.debug(`${EOL}${programMessages.goodbye}`);
 
     exit(0);
   });

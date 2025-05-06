@@ -1,1 +1,3 @@
-export const DEFAULT_USERNAME = 'Default user';
+import { userInfo } from 'node:os';
+
+export const DEFAULT_USERNAME = userInfo().username;

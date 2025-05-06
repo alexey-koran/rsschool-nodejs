@@ -1,3 +1,4 @@
+import { EOL } from 'node:os';
 import { exit as exitProcess } from 'node:process';
 
 const help = {
@@ -8,7 +9,7 @@ const help = {
 };
 
 const exit = ({ programMessages }) => {
-  console.debug(`${programMessages.goodbye}`);
+  console.debug(`${EOL}${programMessages.goodbye}`);
 
   exitProcess(0);
 };
