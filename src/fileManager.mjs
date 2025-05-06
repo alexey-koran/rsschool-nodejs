@@ -94,7 +94,7 @@ const startFileManager = async () => {
             changeCurrentWorkingDirectory,
           });
 
-          console.debug(`${command} ${programMessages.operationSuccessful}`);
+          console.debug(`${EOL}${command} ${programMessages.operationSuccessful}`);
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
