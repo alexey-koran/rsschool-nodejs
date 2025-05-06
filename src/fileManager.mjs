@@ -98,7 +98,7 @@ const startFileManager = async () => {
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
-          console.error(`${programErrors.operationFailed}. ${EOL}${error?.message}`);
+          console.error(`${programErrors.operationFailed}${EOL}${error?.message}`);
         }
       } catch (error) {
         console.error(error?.message);
