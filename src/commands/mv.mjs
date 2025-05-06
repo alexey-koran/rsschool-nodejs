@@ -1,4 +1,7 @@
-import { cp, rm } from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
+import { rm } from 'node:fs/promises';
+import { basename, join } from 'node:path';
+import { pipeline } from 'node:stream/promises';
 
 import { pathToFile, pathToNewDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
@@ -20,18 +23,19 @@ const mv = async ({
   passedParameters: [_pathToFile, _pathToNewDirectory],
   currentWorkingDirectory,
 }) => {
+  const baseName = basename(_pathToFile);
+  const directoryPath = join(_pathToNewDirectory, baseName);
+
   const sourcePath = getPath({ path: _pathToFile, currentWorkingDirectory });
-  const destinationPath = getPath({ path: _pathToNewDirectory, currentWorkingDirectory });
+  const destinationPath = getPath({ path: directoryPath, currentWorkingDirectory });
 
   await validatePath(sourcePath);
   await validatePath(destinationPath);
 
-  await cp(sourcePath, destinationPath, {
-    errorOnExist: true,
-    force: false,
-    recursive: true,
-    preserveTimestamps: true,
-  });
+  const sourceStream = createReadStream(sourcePath);
+  const destinationStream = createWriteStream(destinationPath);
+
+  await pipeline(sourceStream, destinationStream);
 
   await rm(sourcePath);
 };
