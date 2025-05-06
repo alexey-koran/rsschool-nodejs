@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { pathToDirectory } from '../parameters/index.mjs';
 import { getCommandUsage } from '../utils/commandUsage.mjs';
+import { getPath } from '../validation/path.mjs';
 
 const parameters = {
   mandatory: [pathToDirectory],
@@ -16,7 +17,9 @@ const help = {
 };
 
 const mkdir = async ({ passedParameters: [_pathToDirectory], currentWorkingDirectory }) => {
-  await _mkdir(join(currentWorkingDirectory, _pathToDirectory));
+  const newPath = getPath({ path: _pathToDirectory, currentWorkingDirectory });
+
+  await _mkdir(join(currentWorkingDirectory, newPath));
 };
 
 export default {
