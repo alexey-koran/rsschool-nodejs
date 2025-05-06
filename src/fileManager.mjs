@@ -111,7 +111,7 @@ const startFileManager = async () => {
   });
 
   readLine.on('SIGINT', () => {
-    console.debug(`${programMessages.goodbye}`);
+    console.debug(`${EOL}${programMessages.goodbye}`);
 
     exit(0);
   });
