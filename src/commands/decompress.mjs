@@ -31,9 +31,12 @@ const decompress = async ({
   const brotliDecompress = createBrotliDecompress();
 
   const sourceStream = createReadStream(sourcePath);
+
+  await pipeline(sourceStream, brotliDecompress);
+
   const destinationStream = createWriteStream(destinationPath);
 
-  await pipeline(sourceStream, brotliDecompress, destinationStream);
+  await pipeline(brotliDecompress, destinationStream);
 };
 
 export default {
