@@ -31,9 +31,12 @@ const compress = async ({
   const brotliCompress = createBrotliCompress();
 
   const sourceStream = createReadStream(sourcePath);
+
+  await pipeline(sourceStream, brotliCompress);
+
   const destinationStream = createWriteStream(destinationPath);
 
-  await pipeline(sourceStream, brotliCompress, destinationStream);
+  await pipeline(brotliCompress, destinationStream);
 };
 
 export default {
