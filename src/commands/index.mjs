@@ -9,6 +9,7 @@ import exit from './exit.mjs';
 import hash from './hash.mjs';
 import help from './help.mjs';
 import ls from './ls.mjs';
+import mkdir from './mkdir.mjs';
 import mv from './mv.mjs';
 import os from './os.mjs';
 import rm from './rm.mjs';
@@ -27,6 +28,7 @@ export const commandsMap = {
   hash,
   help,
   ls,
+  mkdir,
   mv,
   os,
   rm,
