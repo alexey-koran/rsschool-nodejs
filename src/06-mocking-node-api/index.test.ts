@@ -51,6 +51,10 @@ describe('doStuffByInterval', () => {
     jest.useFakeTimers();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   afterAll(() => {
     jest.useRealTimers();
   });
