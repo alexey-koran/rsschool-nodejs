@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { throttledGetDataFromApi } from './index';
 
-describe('throttledGetDataFromApi', () => {
-  const mockedUrl = 'https://jsonplaceholder.typicode.com';
-  const relativePath = '/users/1';
+jest.mock('axios');
 
-  const mockedResponse = {
+import { throttledGetDataFromApi, THROTTLE_TIME } from './index';
+
+const baseUrl = 'https://jsonplaceholder.typicode.com';
+const relativePath = '/users/1';
+
+const mockedResponse = {
+  data: {
     id: 1,
     name: 'Leanne Graham',
     username: 'Bret',
@@ -27,14 +30,19 @@ describe('throttledGetDataFromApi', () => {
       catchPhrase: 'Multi-layered client-server neural-net',
       bs: 'harness real-time e-markets',
     },
-  };
+  },
+};
 
-  beforeEach(() => {
-    jest.runOnlyPendingTimers();
-  });
+describe('throttledGetDataFromApi', () => {
+  let mockGet: jest.Mock;
 
   beforeAll(() => {
     jest.useFakeTimers();
+  });
+
+  beforeEach(() => {
+    mockGet = jest.fn().mockResolvedValue(mockedResponse);
+    (axios.create as jest.Mock).mockReturnValue({ get: mockGet });
   });
 
   afterEach(() => {
@@ -43,27 +51,26 @@ describe('throttledGetDataFromApi', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    jest.unmock('axios');
   });
 
   test('should create instance with provided base url', async () => {
-    const spyAxiosCreate = jest.spyOn(axios, 'create');
-
     await throttledGetDataFromApi(relativePath);
+    jest.advanceTimersByTime(THROTTLE_TIME);
 
-    expect(spyAxiosCreate).toHaveBeenCalledWith({ baseURL: mockedUrl });
+    expect(axios.create).toHaveBeenCalledWith({
+      baseURL: baseUrl,
+    });
   });
 
   test('should perform request to correct provided url', async () => {
-    const spyAxiosGet = jest.spyOn(axios.Axios.prototype, 'get');
-
     await throttledGetDataFromApi(relativePath);
 
-    expect(spyAxiosGet).toHaveBeenCalledWith(relativePath);
+    expect(mockGet).toHaveBeenCalledWith(relativePath);
   });
 
   test('should return response data', async () => {
-    expect(throttledGetDataFromApi(relativePath)).resolves.toStrictEqual(
-      mockedResponse,
-    );
+    const result = await throttledGetDataFromApi(relativePath);
+    expect(result).toStrictEqual(mockedResponse.data);
   });
 });
