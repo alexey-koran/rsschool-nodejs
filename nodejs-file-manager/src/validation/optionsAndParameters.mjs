@@ -1,47 +1,61 @@
-import { EOL } from 'node:os';
+import { defaultMessages, programErrors } from '../messages.mjs';
+import { formatError } from '../utils/error.mjs';
 
-import { programErrors } from '../messages.mjs';
+const validateOptions = ({ command, options = {}, passedOptions = [] }) => {
+  const definedOptionKeys = Object.keys(options);
+
+  if (definedOptionKeys.length === 0 && passedOptions.length > 0) {
+    throw new Error(
+      formatError(programErrors.invalidInput, `${command} ${programErrors.notSupportOptions}`),
+    );
+  }
+
+  const unknownOptions = passedOptions.filter((opt) => !definedOptionKeys.includes(opt));
+
+  if (unknownOptions.length > 0) {
+    throw new Error(
+      formatError(
+        programErrors.invalidInput,
+        `${programErrors.unknownOptions} ${command}: ${unknownOptions.join(', ')}`,
+        `${defaultMessages.supportedOptions}: ${definedOptionKeys.join(', ')}`,
+      ),
+    );
+  }
+};
+
+const validateMandatoryParameters = ({ mandatory = [], passedParameters = [] }) => {
+  const isMissing = mandatory.length > passedParameters.length;
+
+  if (!isMissing) {
+    return;
+  }
+
+  const missingFields = mandatory
+    .slice(passedParameters.length)
+    .map((field) => field.description.text)
+    .join(', ')
+    .trim();
+
+  throw new Error(
+    formatError(programErrors.invalidInput, `${missingFields} ${programErrors.notSpecified}`),
+  );
+};
 
 export const validateOptionsAndParameters = async ({
   command,
-  passedOptions = [],
-  passedParameters = [],
   options = {},
   parameters = {},
+  passedOptions = [],
+  passedParameters = [],
 }) => {
-  const { mandatory, optional } = parameters;
+  validateOptions({ command, options, passedOptions });
 
-  if (!options && passedOptions?.length) {
-    throw new Error(
-      `${programErrors.invalidInput}${EOL}${command} ${programErrors.notSupportOptions}`,
-    );
+  const { mandatory = [], optional = [] } = parameters;
+  const totalExpected = mandatory.length + optional.length;
+
+  if (passedParameters.length > totalExpected) {
+    throw new Error(formatError(programErrors.invalidInput, programErrors.tooMuchArguments));
   }
 
-  const totalCount = mandatory?.length + optional?.length;
-
-  if (passedParameters?.length > totalCount) {
-    throw new Error(`${programErrors.invalidInput}${EOL}${programErrors.tooMuchArguments}`);
-  }
-
-  if (mandatory?.length && !passedParameters?.length) {
-    const mandatoryFields = mandatory
-      .map((field) => field.description.text)
-      .join(', ')
-      .trim();
-
-    throw new Error(
-      `${EOL}${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}${EOL}`,
-    );
-  } else if (mandatory?.length && passedParameters?.length < mandatory?.length) {
-    const notSpecifiedMandatoryFields = mandatory.slice(passedParameters?.length);
-
-    const mandatoryFields = notSpecifiedMandatoryFields
-      .map((field) => field.description.text)
-      .join(', ')
-      .trim();
-
-    throw new Error(
-      `${EOL}${programErrors.invalidInput}${EOL}${mandatoryFields} ${programErrors.notSpecified}${EOL}`,
-    );
-  }
+  validateMandatoryParameters({ mandatory, passedParameters });
 };

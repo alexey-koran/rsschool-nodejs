@@ -8,6 +8,7 @@ import {
   printWorkingDirectory,
   printWelcomeUser,
   programErrors,
+  defaultMessages,
 } from './messages.mjs';
 import { getUsernameFromArgv } from './utils/arguments.mjs';
 import { getHelpMap } from './utils/help.mjs';
@@ -94,11 +95,11 @@ const startFileManager = async () => {
             changeCurrentWorkingDirectory,
           });
 
-          console.debug(`${EOL}${command} ${programMessages.operationSuccessful}`);
+          console.debug(`${EOL}${command} ${defaultMessages.operationSuccessful}`);
 
           printWorkingDirectory(newWorkingDirectory || currentWorkingDirectory);
         } catch (error) {
-          console.error(`${programErrors.operationFailed}${EOL}${error?.message}${EOL}`);
+          console.error(`${EOL}${programErrors.operationFailed}${error?.message}`);
         }
       } catch (error) {
         console.error(error?.message);
