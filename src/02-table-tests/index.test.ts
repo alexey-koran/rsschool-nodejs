@@ -14,148 +14,148 @@ interface RawTestCase {
   expected: unknown;
 }
 
-const calcAddition = (a: number, b: number) => a + b;
+const addTwoNumbers = (a: number, b: number) => a + b;
 
-const additionTestCases: ValidTestCase[] = [
+const addOperationTests: ValidTestCase[] = [
   {
     a: 1,
     b: 2,
     action: Action.Add,
-    expected: calcAddition(1, 2),
+    expected: addTwoNumbers(1, 2),
   },
   {
     a: -5,
     b: 6,
     action: Action.Add,
-    expected: calcAddition(-5, 6),
+    expected: addTwoNumbers(-5, 6),
   },
   {
     a: 6,
     b: -5,
     action: Action.Add,
-    expected: calcAddition(6, -5),
+    expected: addTwoNumbers(6, -5),
   },
   {
     a: -5,
     b: -6,
     action: Action.Add,
-    expected: calcAddition(-5, -6),
+    expected: addTwoNumbers(-5, -6),
   },
 ];
 
-const calcSubtraction = (a: number, b: number) => a - b;
+const subtractTwoNumbers = (a: number, b: number) => a - b;
 
-const subtractionTestCases: ValidTestCase[] = [
+const subtractOperationTests: ValidTestCase[] = [
   {
     a: 1,
     b: 2,
     action: Action.Subtract,
-    expected: calcSubtraction(1, 2),
+    expected: subtractTwoNumbers(1, 2),
   },
   {
     a: -5,
     b: 6,
     action: Action.Subtract,
-    expected: calcSubtraction(-5, 6),
+    expected: subtractTwoNumbers(-5, 6),
   },
   {
     a: 6,
     b: -5,
     action: Action.Subtract,
-    expected: calcSubtraction(6, -5),
+    expected: subtractTwoNumbers(6, -5),
   },
   {
     a: -5,
     b: -6,
     action: Action.Subtract,
-    expected: calcSubtraction(-5, -6),
+    expected: subtractTwoNumbers(-5, -6),
   },
 ];
 
-const calcMultiplication = (a: number, b: number) => a * b;
+const multiplyTwoNumbers = (a: number, b: number) => a * b;
 
-const multiplicationTestCases: ValidTestCase[] = [
+const multiplyOperationTests: ValidTestCase[] = [
   {
     a: 1,
     b: 2,
     action: Action.Multiply,
-    expected: calcMultiplication(1, 2),
+    expected: multiplyTwoNumbers(1, 2),
   },
   {
     a: -5,
     b: 6,
     action: Action.Multiply,
-    expected: calcMultiplication(-5, 6),
+    expected: multiplyTwoNumbers(-5, 6),
   },
   {
     a: 6,
     b: -5,
     action: Action.Multiply,
-    expected: calcMultiplication(6, -5),
+    expected: multiplyTwoNumbers(6, -5),
   },
   {
     a: -5,
     b: -6,
     action: Action.Multiply,
-    expected: calcMultiplication(-5, -6),
+    expected: multiplyTwoNumbers(-5, -6),
   },
 ];
 
-const calcDivision = (a: number, b: number) => a / b;
+const divideTwoNumbers = (a: number, b: number) => a / b;
 
-const divisionTestCases: ValidTestCase[] = [
+const divideOperationTests: ValidTestCase[] = [
   {
     a: 1,
     b: 2,
     action: Action.Divide,
-    expected: calcDivision(1, 2),
+    expected: divideTwoNumbers(1, 2),
   },
   {
     a: -5,
     b: 6,
     action: Action.Divide,
-    expected: calcDivision(-5, 6),
+    expected: divideTwoNumbers(-5, 6),
   },
   {
     a: 6,
     b: -5,
     action: Action.Divide,
-    expected: calcDivision(6, -5),
+    expected: divideTwoNumbers(6, -5),
   },
   {
     a: -5,
     b: -6,
     action: Action.Divide,
-    expected: calcDivision(-5, -6),
+    expected: divideTwoNumbers(-5, -6),
   },
 ];
 
-const calcExponentiation = (a: number, b: number) => Math.pow(a, b);
+const powerTwoNumbers = (a: number, b: number) => Math.pow(a, b);
 
-const exponentiationTestCases: ValidTestCase[] = [
+const powerOperationTests: ValidTestCase[] = [
   {
     a: 1,
     b: 2,
     action: Action.Exponentiate,
-    expected: calcExponentiation(1, 2),
+    expected: powerTwoNumbers(1, 2),
   },
   {
     a: -5,
     b: 6,
     action: Action.Exponentiate,
-    expected: calcExponentiation(-5, 6),
+    expected: powerTwoNumbers(-5, 6),
   },
   {
     a: 6,
     b: -5,
     action: Action.Exponentiate,
-    expected: calcExponentiation(6, -5),
+    expected: powerTwoNumbers(6, -5),
   },
   {
     a: -5,
     b: -6,
     action: Action.Exponentiate,
-    expected: calcExponentiation(-5, -6),
+    expected: powerTwoNumbers(-5, -6),
   },
 ];
 
@@ -217,11 +217,11 @@ const invalidTestCases: RawTestCase[] = [
 ];
 
 const testCases = [
-  ...additionTestCases,
-  ...subtractionTestCases,
-  ...multiplicationTestCases,
-  ...divisionTestCases,
-  ...exponentiationTestCases,
+  ...addOperationTests,
+  ...subtractOperationTests,
+  ...multiplyOperationTests,
+  ...divideOperationTests,
+  ...powerOperationTests,
   ...invalidTestCases,
 ];
 
